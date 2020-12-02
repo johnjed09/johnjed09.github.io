@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Jed Portfolio</title>
+   <link rel="stylesheet" href="./stylesheets/main/main.css">
+</head>
+
+<body>
+
+   <!-- <svg onclick="pageScroller('.welcome')" class="floating-dock" xmlns="http://www.w3.org/2000/svg" width="70"
+      height="68" viewBox="0 0 70 68">
+      <g id="floating_nav" data-name="floating nav" transform="translate(-1638.243 -819.814)">
+         <ellipse id="Ellipse_2" data-name="Ellipse 2" cx="35" cy="34" rx="35" ry="34"
+            transform="translate(1638.243 819.814)" fill="#ffa200" />
+         <ellipse id="Ellipse_9" data-name="Ellipse 9" cx="23" cy="21" rx="23" ry="21"
+            transform="translate(1650.243 832.814)" fill="#f60" />
+         <ellipse id="Ellipse_10" data-name="Ellipse 10" cx="30" cy="29" rx="30" ry="29"
+            transform="translate(1643.243 824.814)" fill="rgba(255,102,0,0.61)" />
+      </g>
+   </svg> -->
+
+   <svg onclick="pageScroller('.welcome')" class="floating-dock" aria-hidden="true" focusable="false" data-prefix="fas"
+      data-icon="arrow-circle-up" class="svg-inline--fa fa-arrow-circle-up fa-w-16" role="img"
+      xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+      <path fill="currentColor"
+         d="M8 256C8 119 119 8 256 8s248 111 248 248-111 248-248 248S8 393 8 256zm143.6 28.9l72.4-75.5V392c0 13.3 10.7 24 24 24h16c13.3 0 24-10.7 24-24V209.4l72.4 75.5c9.3 9.7 24.8 9.9 34.3.4l10.9-11c9.4-9.4 9.4-24.6 0-33.9L273 107.7c-9.4-9.4-24.6-9.4-33.9 0L106.3 240.4c-9.4 9.4-9.4 24.6 0 33.9l10.9 11c9.6 9.5 25.1 9.3 34.4-.4z">
+      </path>
+   </svg>
+
+   <section class="welcome container">
+      <h1>Welcome <span>Folks!</span></h1>
+      <h2>Take a stroll at my Dev Portfolio</h2>
+      <button type="button" onclick="pageScroller('.profile')">Who am I you say?</button>
+   </section>
+
+   <section class="profile container">
+      <div class="left-col about-me">
+         <h3>Hello, how you doin'?</h3>
+         <p>The name is <span class="fullname">John Jedidiah Getes</span>.
+            Got my bachelor's degree at Saint Joseph College and started my Computer Science career. <br><br>
+            <q>Be not afraid of growing slowly,<br> be afraid only of standing still.</q><br><br>
+            I happen to love <span class="orange">orange</span> and got the
+            inspiration, so just bear with me and enjoy the trip on my
+            portfolio! 
+            Thanks!</p>
+
+         <button onclick="pageScroller('.projects')">Checkout my CREATIONS</button>
+      </div>
+
+      <img src="./assets/me.jpg" alt="John Jedidiah Getes Me">
+   </section>
+
+   <section class="projects container">
+      <h3>Have a look of my projects</h3>
+
+      <div class="cards__container">
+         <div class="card">
+            <img src="./assets/projects/1.jpg" alt="project-1">
+
+            <details>
+               <summary>Traffic Ticketing System</summary>
+               <p>An android application that uses Bluetooth printing technology for issuing tickets quickly, and
+                  accurately records driver violators.</p>
+            </details>
+
+            <details>
+               <summary>Tools</summary>
+               <p>Android Studio | JAVA | SQLite</p>
+            </details>
+         </div>
+         <div class="card">
+            <img src="./assets/projects/2.jpg" alt="project-1">
+            <details>
+               <summary>Waterwise Application</summary>
+               <p>A water business desktop application that operates basic CRUD and prints informative and useful
+                  documents for
+                  everyday tasks.</p>
+            </details>
+
+            <details>
+               <summary>Tools</summary>
+               <p>Microsoft Visual Studio | C# | Microsoft SQL Server </p>
+            </details>
+         </div>
+         <div class="card">
+            <img src="./assets/projects/3.jpg" alt="project-1">
+            <details>
+               <summary>NPTA Website</summary>
+               <p>A website that helps an association for spreading their advocacies and reactions especially school
+                  matters with regards to teachers, students, and parents' relationship.</p>
+            </details>
+
+            <details>
+               <summary>Tools</summary>
+               <p>HTML | CSS/SASS | Javascript</p>
+            </details>
+         </div>
+      </div>
+
+      <button onclick="pageScroller('.contact-me')">Contact me Maybe?</button>
+   </section>
+
+   <section class="contact-me container">
+      <h3>Connect with me</h3>
+      <div class="copy-paste__links">
+         <div class="tooltip">
+            <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
+            <img src="./assets/connect-me/icons/mobile number.png" alt="mobile" longdesc="+639 355 928 742">
+         </div>
+         <div class="tooltip">
+            <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
+            <img src="./assets/connect-me/icons/facebook.png" alt="facebook"
+               longdesc="https://www.facebook.com/johnjedidiah.getes/">
+         </div>
+         <div class="tooltip">
+            <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
+            <img src="./assets/connect-me/icons/github.png" alt="github" longdesc="https://github.com/johnjed09">
+         </div>
+         <div class="tooltip">
+            <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
+            <img src="./assets/connect-me/icons/gmail.png" alt="gmail" longdesc="getesjohnjed09@gmail.com">
+         </div>
+         <div class="tooltip">
+            <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
+            <img src="./assets/connect-me/icons/linkedin.png" alt="linkedin"
+               longdesc="linkedin.com/in/john-jedidiah-getes-428379194">
+         </div>
+      </div>
+   </section>
+
+   <script src="./js/main.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the button component.
+// -----------------------------------------------------------------------------
+
+.floating-dock {
+   display: none;
+   position: fixed;
+   right: 1em;
+   bottom: 1em;
+   cursor: pointer;
+   z-index: 1;
+   width: 3.5em;
+
+   path {
+      fill:  rgb(253, 108, 11);
+      
+      transition: fill 0.3s;
+      &:hover {
+         fill: rgb(255, 135, 56);
+      }
+   }
+}
