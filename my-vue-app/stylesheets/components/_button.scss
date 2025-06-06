@@ -1,0 +1,12 @@
+button {
+   color: #fff7f2;
+   background-color: #ff6600;
+   border: 2px solid #ffb739;
+   border-radius: 34px;
+   padding: 0.6em 1em;
+   transition: box-shadow 0.3s;
+
+   &:hover {
+      box-shadow: 3px 3px 12px 6px#FFB739;
+   }
+}
