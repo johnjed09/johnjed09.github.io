@@ -1,3 +1,5 @@
+import './stylesheets/main.scss'
+
 //Get the button:
 let floatingButton = document.getElementsByClassName("floating-dock")[0];
 
