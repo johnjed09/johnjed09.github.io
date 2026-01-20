@@ -1,11 +1,11 @@
-import './stylesheets/main.scss'
+import "./stylesheets/main.scss";
 
 //Get the button:
 let floatingButton = document.getElementsByClassName("floating-dock")[0];
 
 // When the user scrolls down 20px from the top of the document, show the button
 window.onscroll = function () {
-  scrollFunction();
+  // scrollFunction();
 };
 
 function scrollFunction() {

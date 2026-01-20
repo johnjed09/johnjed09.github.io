@@ -7,7 +7,7 @@
  */
 .clearfix::after {
   clear: both;
-  content: '';
+  content: "";
   display: table;
 }
 
@@ -18,14 +18,20 @@
  * 3. Leave some space on the edges, especially valuable on small screens
  */
 .container {
-  max-width: $max-width; /* 1 */
-  min-width: 24em; /* 1 */
-  margin-left: auto; /* 2 */
-  margin-right: auto; /* 2 */
-  padding-left: 20px; /* 3 */
-  padding-right: 20px; /* 3 */
-  width: 100%; /* 1 */
- }
+  // max-width: $max-width; /* 1 */
+  // min-width: 24em; /* 1 */
+  // margin-left: auto; /* 2 */
+  // margin-right: auto; /* 2 */
+  // padding-left: 20px; /* 3 */
+  // padding-right: 20px; /* 3 */
+  // width: 100%; /* 1 */
+
+  height: 100vh;
+
+  @include respond-to("large") {
+    padding: 0 5em;
+  }
+}
 
 /**
  * Hide text while making it readable for screen readers

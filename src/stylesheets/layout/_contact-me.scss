@@ -1,35 +1,49 @@
 .contact-me {
-   padding-top: 2em;
-   padding-bottom: 2em;
-   text-align: center;
+  padding: 0 1em;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 100vh;
 
-   h3 {
-      margin-top: 0;
-      text-align: left;
-   }
+  h3 {
+    margin-top: 0;
+    margin-bottom: 0;
+    text-align: left;
+  }
 
-   .copy-paste__links {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+  .copy-paste__links {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    @include respond-to("large") {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    .tooltip {
+      margin-bottom: 1em;
+    }
+
+    span {
+      display: none;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      transition: box-shadow 0.3s;
 
       @include respond-to("large") {
-         flex-direction: row;
-         flex-wrap: wrap;
+        width: unset;
+        padding: 1em 1em;
       }
 
-      img {
-         padding: 0.5em 1em;
-         margin-bottom: 1.2em;
-
-         width: clamp(18em, 80vw, 20em);
-
-         transition: box-shadow 0.3s;
-
-         &:hover {
-            box-shadow: 0px 0px 10px 10px #ccc;
-         }
+      &:hover {
+        box-shadow: 0px 0px 10px 10px #ccc;
       }
-   }
+    }
+  }
 }

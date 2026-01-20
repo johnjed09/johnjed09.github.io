@@ -368,14 +368,18 @@ a {
   text-decoration: none;
 }
 
-a:hover, a:active, a:focus {
+a:hover,
+a:active,
+a:focus {
   color: #222222;
   text-decoration: underline;
 }
 
 @font-face {
-  font-family: 'Nunito Sans';
-  src: url("../../fonts/nunitosans-regular-webfont.woff2") format("woff2"), url("../../fonts/nunitosans-regular-webfont.woff") format("woff");
+  font-family: "Nunito Sans";
+  src:
+    url("../../fonts/nunitosans-regular-webfont.woff2") format("woff2"),
+    url("../../fonts/nunitosans-regular-webfont.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 }
@@ -385,7 +389,14 @@ a:hover, a:active, a:focus {
  */
 body {
   color: #222222;
-  font: normal 125%/1.4 "Nunito Sans", "Open Sans", "Helvetica Neue Light", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  font:
+    normal 125%/1.4 "Nunito Sans",
+    "Open Sans",
+    "Helvetica Neue Light",
+    "Helvetica Neue",
+    "Helvetica",
+    "Arial",
+    sans-serif;
 }
 
 /**
@@ -393,7 +404,7 @@ body {
  */
 .clearfix::after {
   clear: both;
-  content: '';
+  content: "";
   display: table;
 }
 
@@ -611,7 +622,7 @@ body {
   max-width: 17em;
   box-shadow: 3px 3px 10px 2px #ccc;
   transition: box-shadow 0.3s;
-  margin-right: .5em;
+  margin-right: 0.5em;
 }
 
 .projects .cards__container .card:hover {
@@ -713,7 +724,7 @@ body {
 .tooltip .tooltiptext {
   visibility: hidden;
   position: relative;
-  bottom: .5em;
+  bottom: 0.5em;
   background-color: #555;
   color: #fff;
   text-align: center;
@@ -749,7 +760,7 @@ button {
 }
 
 button:hover {
-  box-shadow: 3px 3px 12px 6px #FFB739;
+  box-shadow: 3px 3px 12px 6px #ffb739;
 }
 
 .floating-dock {
