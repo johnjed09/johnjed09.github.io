@@ -1,6 +1,8 @@
 .tooltip {
   position: relative;
   display: block;
+  margin-bottom: 1em;
+  padding: 2px;
 
   &:hover {
     .tooltiptext {
@@ -22,7 +24,7 @@
     opacity: 0;
     transition: opacity 0.3s;
 
-    display: block;
+    display: none;
     width: fit-content;
     margin-left: auto;
     margin-right: auto;
