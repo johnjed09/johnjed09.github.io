@@ -56,7 +56,7 @@ function copyLinkFromImg() {
     var img = imgLinks.getElementsByTagName("img")[i];
     var toolTip = img.previousElementSibling;
 
-    if (img === this) toolTip.innerHTML = "Copied: " + dummy.value;
+    if (img === this) toolTip.innerHTML = "Copied to clipboard.";
   }
 
   // Remove it as its not needed anymore

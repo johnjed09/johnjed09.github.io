@@ -6,6 +6,10 @@
   justify-content: space-evenly;
   height: 100vh;
 
+  @include respond-to("large") {
+    padding: 0 5em;
+  }
+
   h3 {
     margin-top: 0;
     margin-bottom: 0;
@@ -14,7 +18,8 @@
 
   .copy-paste__links {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
 
