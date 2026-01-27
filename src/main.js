@@ -32,7 +32,7 @@ for (var i = 0; i < imgLinks.childElementCount; i++) {
 
 //copy longdesc attribute from img to clipboard
 function copyLinkFromImg() {
-  imgDesc = this.getAttribute("longdesc");
+  var imgDesc = this.getAttribute("longdesc");
 
   // Create a dummy input to copy the string array inside it
   var dummy = document.createElement("input");
@@ -56,7 +56,7 @@ function copyLinkFromImg() {
     var img = imgLinks.getElementsByTagName("img")[i];
     var toolTip = img.previousElementSibling;
 
-    if (img === this) toolTip.innerHTML = "Copied: " + dummy.value;
+    if (img === this) toolTip.innerHTML = "Copied to clipboard.";
   }
 
   // Remove it as its not needed anymore

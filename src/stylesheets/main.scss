@@ -18,9 +18,7 @@
   "layout/profile", "layout/projects", "layout/contact-me";
 
 // 5. Components
-@import //    'components/tooltip',
-  "components/button",
-  "components/floating-dock";
+@import "components/tooltip", "components/button", "components/floating-dock";
 
 // 6. Page-specific styles
 // @import

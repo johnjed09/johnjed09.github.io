@@ -6,6 +6,10 @@
   justify-content: space-evenly;
   height: 100vh;
 
+  @include respond-to("large") {
+    padding: 0 5em;
+  }
+
   h3 {
     margin-top: 0;
     margin-bottom: 0;
@@ -14,21 +18,15 @@
 
   .copy-paste__links {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
 
     @include respond-to("large") {
       flex-direction: row;
       flex-wrap: wrap;
-    }
-
-    .tooltip {
-      margin-bottom: 1em;
-    }
-
-    span {
-      display: none;
+      justify-content: space-evenly;
     }
 
     img {
@@ -36,9 +34,13 @@
       height: 100%;
       transition: box-shadow 0.3s;
 
+      @include respond-to("medium") {
+        width: 70%;
+        height: unset;
+      }
+
       @include respond-to("large") {
         width: unset;
-        padding: 1em 1em;
       }
 
       &:hover {
