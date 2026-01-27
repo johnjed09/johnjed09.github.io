@@ -1,13 +1,10 @@
 import "./stylesheets/main.scss";
 
-//Get the button:
+// Show floating button when scrolling down.
 let floatingButton = document.getElementsByClassName("floating-dock")[0];
-
-// When the user scrolls down 20px from the top of the document, show the button
 window.onscroll = function () {
-  // scrollFunction();
+  scrollFunction();
 };
-
 function scrollFunction() {
   if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
     floatingButton.style.display = "block";
@@ -16,9 +13,8 @@ function scrollFunction() {
   }
 }
 
-const imgLinks = document.getElementsByClassName("copy-paste__links")[0];
-
 // Add eventlisteners for contact-me images.
+const imgLinks = document.getElementsByClassName("copy-paste__links")[0];
 for (var i = 0; i < imgLinks.childElementCount; i++) {
   var img = imgLinks.getElementsByTagName("img")[i];
 
