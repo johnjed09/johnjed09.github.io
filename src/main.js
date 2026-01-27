@@ -18,7 +18,7 @@ function scrollFunction() {
 
 const imgLinks = document.getElementsByClassName("copy-paste__links")[0];
 
-//initialize all eventlisteners in the DOM
+// Add eventlisteners for contact-me images.
 for (var i = 0; i < imgLinks.childElementCount; i++) {
   var img = imgLinks.getElementsByTagName("img")[i];
 
@@ -30,7 +30,7 @@ for (var i = 0; i < imgLinks.childElementCount; i++) {
   });
 }
 
-//copy longdesc attribute from img to clipboard
+// Copy contact details from img to clipboard
 function copyLinkFromImg() {
   var imgDesc = this.getAttribute("longdesc");
 
@@ -63,12 +63,15 @@ function copyLinkFromImg() {
   document.body.removeChild(dummy);
 }
 
-//scoll on each section of the page
-function pageScroller(page) {
-  console.log("jed");
+// Scroll to each section of the page
+const btnsNextSectiondocument = document.querySelectorAll(".btnNextSection");
+btnsNextSectiondocument.forEach((buttonNextSection) =>
+  buttonNextSection.addEventListener("click", pageScroller),
+);
+function pageScroller() {
+  var nextPage = this.getAttribute("data");
 
-  // Scroll to a certain element
-  document.querySelector(page).scrollIntoView({
+  document.querySelector(nextPage).scrollIntoView({
     behavior: "smooth",
   });
 }

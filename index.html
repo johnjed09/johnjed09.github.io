@@ -11,9 +11,7 @@
     <section class="welcome container">
       <h1>Welcome <span>Folks!</span></h1>
       <h2>Take a stroll at my Dev Portfolio</h2>
-      <button type="button" onclick="pageScroller('.profile')">
-        Who am I you say?
-      </button>
+      <button class="btnNextSection" data=".profile">Who am I you say?</button>
     </section>
 
     <section class="profile container">
@@ -33,7 +31,7 @@
           portfolio!  Thanks!
         </p>
 
-        <button onclick="pageScroller('.projects')">
+        <button class="btnNextSection" data=".projects">
           Checkout my CREATIONS
         </button>
       </div>
@@ -93,7 +91,9 @@
         </div>
       </div>
 
-      <button onclick="pageScroller('.contact-me')">Contact me Maybe?</button>
+      <button class="btnNextSection" data=".contact-me">
+        Contact me Maybe?
+      </button>
     </section>
 
     <section class="contact-me">
