@@ -1,4 +1,6 @@
-@use "../abstracts/mixins";
+@use "../abstracts/mixins" as *;
+@use "../abstracts/variables" as *;
+
 // -----------------------------------------------------------------------------
 // This file contains all styles related to the welcome section of the site/application.
 // -----------------------------------------------------------------------------
@@ -9,42 +11,59 @@
   align-items: center;
   justify-content: center;
   text-align: center;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
 
-  background: transparent url("../../assets/Group\ 5.png") no-repeat;
-  background-position: right -11.5rem top -28rem;
+  // Hard background color for the container
+  background-color: $color-background;
 
-  @include mixins.respond-to("large") {
-    text-align: left;
-    align-items: baseline;
-    padding-left: 5em;
+  // 1. MOBILE-FIRST BACKGROUND (Forced to the top right corner)
+  background-image: url("../../assets/bg-top-right-shape.svg");
+  background-repeat: no-repeat;
+  background-position: right -8vw top -12vh;
+
+  @include respond-to("medium") {
+    background-size: 33vw auto;
+    background-position: right -2vw top 0vh;
   }
 
-  h1 {
+  @include respond-to("large") {
+    text-align: left;
+    align-items: baseline;
+    padding-left: 10%;
+    background-size: 24vw auto;
+    background-position: right 0vw top 0vh;
+  }
+
+  &__title {
     margin: 0;
-    font-weight: lighter;
     min-width: 10px;
+    color: $color-text-main;
+    font-weight: normal;
 
     span {
       font-weight: bold;
+      color: $color-primary;
     }
   }
 
-  h2 {
-    margin: 0;
+  &__subtitle {
+    margin: 0.5rem 0 0 0;
     font-weight: lighter;
-    line-height: 1em;
+    line-height: 1.2;
+    color: $color-secondary;
 
-    @include mixins.respond-to("mobileLarge") {
+    @include respond-to("mobileLarge") {
       padding: 0 1em;
     }
 
-    @include mixins.respond-to("medium") {
+    @include respond-to("medium") {
       padding: unset;
     }
   }
 
-  button {
-    position: relative;
-    top: 3em;
+  &__cta {
+    margin-top: 3rem;
   }
 }
