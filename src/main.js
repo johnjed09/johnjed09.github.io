@@ -60,14 +60,19 @@ function copyLinkFromImg() {
 }
 
 // Scroll to each section of the page
-const btnsNextSectiondocument = document.querySelectorAll(".btnNextSection");
-btnsNextSectiondocument.forEach((buttonNextSection) =>
-  buttonNextSection.addEventListener("click", pageScroller),
-);
-function pageScroller() {
-  var nextPage = this.getAttribute("data");
+const scrollButtons = document.querySelectorAll(".btnNextSection");
+scrollButtons.forEach((button) =>
+  button.addEventListener("click", function (event) {
+    event.preventDefault();
 
-  document.querySelector(nextPage).scrollIntoView({
-    behavior: "smooth",
-  });
-}
+    const targetSelector = this.dataset.target;
+    const targetSection = document.querySelector(targetSelector);
+
+    if (targetSection) {
+      targetSection.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  }),
+);
