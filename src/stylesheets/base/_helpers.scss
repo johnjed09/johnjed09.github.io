@@ -1,3 +1,5 @@
+@use "../abstracts/variables";
+@use "../abstracts/mixins";
 // -----------------------------------------------------------------------------
 // This file contains CSS helper classes.
 // -----------------------------------------------------------------------------
@@ -28,7 +30,7 @@
 
   height: 100vh;
 
-  @include respond-to("large") {
+  @include mixins.respond-to("large") {
     padding: 0 5em;
   }
 }

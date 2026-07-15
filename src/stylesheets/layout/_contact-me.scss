@@ -1,3 +1,6 @@
+@use "../abstracts/mixins" as *;
+@use "../abstracts/variables" as *;
+
 .contact-me {
   padding: 0 1em;
   text-align: center;

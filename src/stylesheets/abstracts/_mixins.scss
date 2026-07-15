@@ -1,3 +1,6 @@
+@use "sass:map";
+@use "sass:meta";
+@use "../abstracts/variables" as *;
 // -----------------------------------------------------------------------------
 // This file contains all application-wide Sass mixins.
 // -----------------------------------------------------------------------------
@@ -37,16 +40,16 @@
 /// @param {String} $name - Breakpoint
 /// @requires $breakpoints
 @mixin respond-to($name) {
-  @if map-has-key($breakpoints, $name) {
+  @if map.has-key($breakpoints, $name) {
     // Prints a media query based on the value
-    @media #{inspect(map-get($breakpoints, $name))} {
+    @media #{meta.inspect(map.get($breakpoints, $name))} {
       @content;
     }
   }
 
   // If the key doesn't exist in the map
   @else {
-    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+    @warn "Unfortunately, no value could be retrieved from `#{$name}`. "
           + "Please make sure it is defined in `$breakpoints` map.";
   }
 }

@@ -1,3 +1,4 @@
+@use "../abstracts/mixins";
 // -----------------------------------------------------------------------------
 // This file contains all styles related to the welcome section of the site/application.
 // -----------------------------------------------------------------------------
@@ -12,7 +13,7 @@
   background: transparent url("../../assets/Group\ 5.png") no-repeat;
   background-position: right -11.5rem top -28rem;
 
-  @include respond-to("large") {
+  @include mixins.respond-to("large") {
     text-align: left;
     align-items: baseline;
     padding-left: 5em;
@@ -33,11 +34,11 @@
     font-weight: lighter;
     line-height: 1em;
 
-    @include respond-to("mobileLarge") {
+    @include mixins.respond-to("mobileLarge") {
       padding: 0 1em;
     }
 
-    @include respond-to("medium") {
+    @include mixins.respond-to("medium") {
       padding: unset;
     }
   }
