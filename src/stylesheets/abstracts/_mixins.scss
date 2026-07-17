@@ -53,3 +53,21 @@
           + "Please make sure it is defined in `$breakpoints` map.";
   }
 }
+
+// -----------------------------------------------------------------------------
+// Shared Application-wide Placeholders
+// -----------------------------------------------------------------------------
+
+/// Glassmorphic overlay badge base style
+%badge-base {
+  position: absolute;
+  top: 0.5rem;
+  z-index: 10;
+  color: #ffffff;
+  background: rgba(26, 28, 32, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+}

@@ -48,53 +48,196 @@
     <section class="projects" id="projects">
       <h3>Have a look of my projects</h3>
 
-      <div class="cards">
-        <div class="card">
-          <img src="./assets/projects/1.jpg" alt="project-1" />
-          <details>
-            <summary>Traffic Ticketing System</summary>
-            <p>
-              An android application that uses Bluetooth printing technology for
-              issuing tickets quickly, and accurately records driver violators.
-            </p>
-          </details>
+      <div class="carousel-container">
+        <button class="carousel-button prev">
+          <svg viewBox="0 0 24 24" width="24" height="24">
+            <path
+              fill="currentColor"
+              d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"
+            />
+          </svg>
+        </button>
 
-          <details>
-            <summary>Tools</summary>
-            <p>Android Studio | JAVA | SQLite</p>
-          </details>
-        </div>
-        <div class="card">
-          <img src="./assets/projects/2.jpg" alt="project-1" />
-          <details>
-            <summary>Waterwise Application</summary>
-            <p>
-              A water business desktop application that operates basic CRUD and
-              prints informative and useful documents for everyday tasks.
-            </p>
-          </details>
+        <div class="cards">
+          <div class="cards__track">
+            <!-- PROJECT 1: TRAFFIC TICKETING SYSTEM -->
+            <div class="card">
+              <div class="card__image-container">
+                <span
+                  class="gallery-zoom-badge"
+                  aria-label="Tap to view larger image"
+                >
+                  <svg viewBox="0 0 24 24" width="14" height="14">
+                    <path
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm10 2l-4.35-4.35"
+                    />
+                  </svg>
+                </span>
+                <span class="gallery-badge">Swipe to view</span>
+                <div class="card__gallery">
+                  <img
+                    src="./assets/projects/1.jpg"
+                    alt="project-1"
+                    loading="lazy"
+                    draggable="false"
+                  />
+                  <img
+                    src="./assets/projects/1.jpg"
+                    alt="project-1"
+                    loading="lazy"
+                    draggable="false"
+                  />
+                  <img
+                    src="./assets/projects/2.jpg"
+                    alt="project-1"
+                    loading="lazy"
+                    draggable="false"
+                  />
+                </div>
+              </div>
 
-          <details>
-            <summary>Tools</summary>
-            <p>Microsoft Visual Studio | C# | Microsoft SQL Server</p>
-          </details>
-        </div>
-        <div class="card">
-          <img src="./assets/projects/3.jpg" alt="project-1" />
-          <details>
-            <summary>NPTA Website</summary>
-            <p>
-              A website that helps an association for spreading their advocacies
-              and reactions especially school matters with regards to teachers,
-              students, and parents' relationship.
-            </p>
-          </details>
+              <div class="card__content">
+                <details>
+                  <summary>Traffic Ticketing System</summary>
+                  <p>
+                    An android application that uses Bluetooth printing
+                    technology for issuing tickets quickly, and accurately
+                    records driver violators.
+                  </p>
+                </details>
+              </div>
 
-          <details>
-            <summary>Tools</summary>
-            <p>HTML | CSS/SASS | Javascript</p>
-          </details>
+              <details>
+                <summary>Tools</summary>
+                <p>Android Studio | JAVA | SQLite</p>
+              </details>
+            </div>
+
+            <!-- PROJECT 2: WATERWISE APPLICATION -->
+            <div class="card">
+              <div class="card__image-container">
+                <span
+                  class="gallery-zoom-badge"
+                  aria-label="Tap to view larger image"
+                >
+                  <svg viewBox="0 0 24 24" width="14" height="14">
+                    <path
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm10 2l-4.35-4.35"
+                    />
+                  </svg>
+                </span>
+                <span class="gallery-badge">Swipe to view</span>
+                <div class="card__gallery">
+                  <img
+                    src="./assets/projects/2.jpg"
+                    alt="project-2"
+                    loading="lazy"
+                    draggable="false"
+                  />
+                  <img
+                    src="./assets/projects/2.jpg"
+                    alt="project-2"
+                    loading="lazy"
+                    draggable="false"
+                  />
+                </div>
+              </div>
+
+              <div class="card__content">
+                <details>
+                  <summary>Waterwise Application</summary>
+                  <p>
+                    A water business desktop application that operates basic
+                    CRUD and prints informative and useful documents for
+                    everyday tasks.
+                  </p>
+                </details>
+              </div>
+
+              <details>
+                <summary>Tools</summary>
+                <p>Microsoft Visual Studio | C# | Microsoft SQL Server</p>
+              </details>
+            </div>
+
+            <!-- PROJECT 3: NPTA WEBSITE -->
+            <div class="card">
+              <div class="card__image-container">
+                <span
+                  class="gallery-zoom-badge"
+                  aria-label="Tap to view larger image"
+                >
+                  <svg viewBox="0 0 24 24" width="14" height="14">
+                    <path
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm10 2l-4.35-4.35"
+                    />
+                  </svg>
+                </span>
+                <span class="gallery-badge">Swipe to view</span>
+                <div class="card__gallery">
+                  <img
+                    src="./assets/projects/3.jpg"
+                    alt="project-3"
+                    loading="lazy"
+                    draggable="false"
+                  />
+                  <img
+                    src="./assets/projects/3.jpg"
+                    alt="project-3"
+                    loading="lazy"
+                    draggable="false"
+                  />
+                </div>
+              </div>
+
+              <div class="card__content">
+                <details>
+                  <summary>NPTA Website</summary>
+                  <p>
+                    A website that helps an association for spreading their
+                    advocacies and reactions especially school matters with
+                    regards to teachers, students, and parents' relationship.
+                  </p>
+                </details>
+              </div>
+
+              <details>
+                <summary>Tools</summary>
+                <p>HTML | CSS/SASS | Javascript</p>
+              </details>
+            </div>
+          </div>
         </div>
+
+        <button class="carousel-button next">
+          <svg viewBox="0 0 24 24" width="24" height="24">
+            <path
+              fill="currentColor"
+              d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <div class="carousel-indicators">
+        <button class="indicator active" data-slide-to="0"></button>
+        <button class="indicator" data-slide-to="1"></button>
+        <button class="indicator" data-slide-to="2"></button>
       </div>
 
       <button class="btnNextSection" data=".contact-me">
