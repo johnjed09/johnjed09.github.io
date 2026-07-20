@@ -49,22 +49,13 @@ $color-border: $_color-light-grey !default;
 /// @type Length
 $max-width: 1180px !default;
 
-/// Breakpoints map
-/// @prop {String} keys - Keys are identifiers mapped to a given length
-/// @prop {Map} values - Values are actual breakpoints expressed in pixels
+/// Modern Breakpoints Map (Storing raw values instead of expression fragments)
+/// @type Map
 $breakpoints: (
-  "small": (
-    min-width: 320px,
-  ),
-  "mobileLarge": (
-    min-width: 425px,
-  ),
-  "medium": (
-    min-width: 768px,
-  ),
-  "large": (
-    min-width: 1024px,
-  ),
+  "small": 320px,
+  "mobileLarge": 425px,
+  "medium": 768px,
+  "large": 1024px,
 ) !default;
 
 /// Relative or absolute URL where all assets are served from

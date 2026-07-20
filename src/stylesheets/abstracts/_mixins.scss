@@ -37,12 +37,12 @@
 
 /// Responsive breakpoint manager
 /// @access public
-/// @param {String} $name - Breakpoint
+/// @param {String} $name - Breakpoint name ('small', 'medium', 'large')
 /// @requires $breakpoints
 @mixin respond-to($name) {
   @if map.has-key($breakpoints, $name) {
-    // Prints a media query based on the value
-    @media #{meta.inspect(map.get($breakpoints, $name))} {
+    $value: map.get($breakpoints, $name);
+    @media (min-width: $value) {
       @content;
     }
   }
