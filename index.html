@@ -60,7 +60,6 @@
 
         <div class="cards">
           <div class="cards__track">
-            <!-- PROJECT 1: TRAFFIC TICKETING SYSTEM -->
             <div class="card">
               <div class="card__image-container">
                 <span
@@ -102,23 +101,43 @@
               </div>
 
               <div class="card__content">
-                <details>
-                  <summary>Traffic Ticketing System</summary>
-                  <p>
-                    An android application that uses Bluetooth printing
-                    technology for issuing tickets quickly, and accurately
-                    records driver violators.
-                  </p>
+                <h3 class="card__title">Traffic Ticketing System</h3>
+
+                <div class="card__tools">
+                  <span class="tool-tag">Android</span>
+                  <span class="tool-tag">Kotlin</span>
+                  <span class="tool-tag">Bluetooth API</span>
+                  <span class="tool-tag">SQLite</span>
+                </div>
+
+                <p class="card__description">
+                  An android application that uses Bluetooth printing technology
+                  for issuing tickets quickly, and accurately records driver
+                  violators.
+                </p>
+
+                <details class="card__details">
+                  <summary>Key Features & Specs</summary>
+                  <div class="card__details-content">
+                    <ul>
+                      <li>
+                        <strong>Wireless Printing:</strong> Instant physical
+                        ticket generation via mobile Bluetooth thermal printers.
+                      </li>
+                      <li>
+                        <strong>Violator Database:</strong> Real-time logging
+                        and retrieval of driver records.
+                      </li>
+                      <li>
+                        <strong>Offline Mode:</strong> Full capability to draft
+                        tickets offline with automatic background sync.
+                      </li>
+                    </ul>
+                  </div>
                 </details>
               </div>
-
-              <details>
-                <summary>Tools</summary>
-                <p>Android Studio | JAVA | SQLite</p>
-              </details>
             </div>
 
-            <!-- PROJECT 2: WATERWISE APPLICATION -->
             <div class="card">
               <div class="card__image-container">
                 <span
@@ -154,23 +173,45 @@
               </div>
 
               <div class="card__content">
-                <details>
-                  <summary>Waterwise Application</summary>
-                  <p>
-                    A water business desktop application that operates basic
-                    CRUD and prints informative and useful documents for
-                    everyday tasks.
-                  </p>
+                <h3 class="card__title">Waterwise Application</h3>
+
+                <div class="card__tools">
+                  <span class="tool-tag">C#</span>
+                  <span class="tool-tag">Visual Studio</span>
+                  <span class="tool-tag">MS SQL Server</span>
+                </div>
+
+                <p class="card__description">
+                  A water business desktop application that operates basic CRUD
+                  and prints informative and useful documents for everyday
+                  tasks.
+                </p>
+
+                <details class="card__details">
+                  <summary>Key Features & Specs</summary>
+                  <div class="card__details-content">
+                    <ul>
+                      <li>
+                        <strong>Data Management:</strong> Streamlined CRUD
+                        operations to smoothly handle consumer accounts and
+                        usage profiles.
+                      </li>
+                      <li>
+                        <strong>Document Generation:</strong> Instant printing
+                        setups for professional invoices, summary logs, and
+                        statements.
+                      </li>
+                      <li>
+                        <strong>Relational Storage:</strong> Scalable SQL
+                        architecture ensuring quick queries and optimized data
+                        integrity.
+                      </li>
+                    </ul>
+                  </div>
                 </details>
               </div>
-
-              <details>
-                <summary>Tools</summary>
-                <p>Microsoft Visual Studio | C# | Microsoft SQL Server</p>
-              </details>
             </div>
 
-            <!-- PROJECT 3: NPTA WEBSITE -->
             <div class="card">
               <div class="card__image-container">
                 <span
@@ -206,20 +247,43 @@
               </div>
 
               <div class="card__content">
-                <details>
-                  <summary>NPTA Website</summary>
-                  <p>
-                    A website that helps an association for spreading their
-                    advocacies and reactions especially school matters with
-                    regards to teachers, students, and parents' relationship.
-                  </p>
+                <h3 class="card__title">NPTA Website</h3>
+
+                <div class="card__tools">
+                  <span class="tool-tag">HTML5</span>
+                  <span class="tool-tag">CSS / SASS</span>
+                  <span class="tool-tag">JavaScript</span>
+                </div>
+
+                <p class="card__description">
+                  A website that helps an association for spreading their
+                  advocacies and reactions especially school matters with
+                  regards to teachers, students, and parents' relationship.
+                </p>
+
+                <details class="card__details">
+                  <summary>Key Features & Specs</summary>
+                  <div class="card__details-content">
+                    <ul>
+                      <li>
+                        <strong>Advocacy Hub:</strong> Dedicated digital
+                        channels for publishing community insights and
+                        school-related circulars.
+                      </li>
+                      <li>
+                        <strong>Responsive Design:</strong> Fully responsive
+                        interface written with modern SASS workflows for crisp
+                        cross-device reading.
+                      </li>
+                      <li>
+                        <strong>Interactive Layouts:</strong> Dynamic JavaScript
+                        elements to drive seamless user engagements and media
+                        browsing.
+                      </li>
+                    </ul>
+                  </div>
                 </details>
               </div>
-
-              <details>
-                <summary>Tools</summary>
-                <p>HTML | CSS/SASS | Javascript</p>
-              </details>
             </div>
           </div>
         </div>
@@ -234,14 +298,18 @@
         </button>
       </div>
 
-      <div class="carousel-indicators">
-        <button class="indicator active" data-slide-to="0"></button>
-        <button class="indicator" data-slide-to="1"></button>
-        <button class="indicator" data-slide-to="2"></button>
-      </div>
-
-      <button class="btnNextSection" data=".contact-me">
-        Contact me Maybe?
+      <button class="btnNextSection projects__cta" data=".contact-me">
+        <span>Contact me Maybe?</span>
+        <svg viewBox="0 0 24 24" width="16" height="16">
+          <path
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M19 14l-7 7-7-7M12 5v16"
+          />
+        </svg>
       </button>
     </section>
 
@@ -309,6 +377,5 @@
       ></path>
     </svg>
     <script type="module" src="/src/main.js"></script>
-    <script src="/vendor/infinite-carousel-autoplay/script.js"></script>
   </body>
 </html>

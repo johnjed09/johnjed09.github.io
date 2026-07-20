@@ -288,5 +288,194 @@ document.addEventListener("DOMContentLoaded", () => {
       const walk = (x - startX) * 1.5;
       gallery.scrollLeft = scrollLeft - walk;
     });
+
+    gallery.addEventListener(
+      "pointerdown",
+      (e) => {
+        e.stopPropagation();
+      },
+      { passive: true },
+    );
+
+    gallery.addEventListener(
+      "pointermove",
+      (e) => {
+        e.stopPropagation();
+      },
+      { passive: true },
+    );
+
+    gallery.addEventListener(
+      "pointerup",
+      (e) => {
+        e.stopPropagation();
+      },
+      { passive: true },
+    );
+  });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const maskContainer = document.querySelector(".cards");
+  const track = document.querySelector(".cards__track");
+  const prevButton = document.querySelector(".carousel-button.prev");
+  const nextButton = document.querySelector(".carousel-button.next");
+  const cards = document.querySelectorAll(".card");
+
+  if (!track || !prevButton || !nextButton || cards.length === 0) return;
+
+  let currentIndex = 0;
+  let isCarouselEnabled = true;
+
+  // Dragging / Swiping State Variables
+  let isDragging = false;
+  let startX = 0;
+  let currentTranslate = 0;
+  let prevTranslate = 0;
+
+  // Evaluates layout sizes to determine if the track overflows the viewing viewport mask
+  function evaluateCarouselState() {
+    if (!maskContainer || !track) return;
+
+    // Temporarily clear inline styles to get natural architectural measurements
+    track.style.transform = "none";
+
+    const isOverflowing = track.scrollWidth > maskContainer.clientWidth;
+
+    if (!isOverflowing) {
+      isCarouselEnabled = false;
+      currentIndex = 0;
+      prevTranslate = 0;
+      currentTranslate = 0;
+
+      prevButton.style.display = "none";
+      nextButton.style.display = "none";
+      if (maskContainer) maskContainer.classList.add("carousel-disabled");
+    } else {
+      isCarouselEnabled = true;
+      prevButton.style.display = "";
+      nextButton.style.display = "";
+      if (maskContainer) maskContainer.classList.remove("carousel-disabled");
+      updateSliderPosition();
+    }
+  }
+
+  // Calculate the shift amount dynamically based on layout styles
+  function getShiftAmount() {
+    const cardWidth = cards[0].getBoundingClientRect().width;
+    const computedStyle = window.getComputedStyle(track);
+    const gap = parseFloat(computedStyle.gap) || 0;
+    return cardWidth + gap;
+  }
+
+  function getMaxIndex() {
+    const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
+    return isTablet ? cards.length - 2 : cards.length - 1;
+  }
+
+  function updateSliderPosition() {
+    if (!isCarouselEnabled) {
+      track.style.transform = "none";
+      return;
+    }
+    currentTranslate = -currentIndex * getShiftAmount();
+    prevTranslate = currentTranslate;
+    track.style.transform = `translateX(${currentTranslate}px)`;
+  }
+
+  // Button Listeners
+  nextButton.addEventListener("click", () => {
+    if (!isCarouselEnabled) return;
+    const maxIndex = getMaxIndex();
+    if (currentIndex < maxIndex) {
+      currentIndex++;
+    } else {
+      currentIndex = 0;
+    }
+    updateSliderPosition();
+  });
+
+  prevButton.addEventListener("click", () => {
+    if (!isCarouselEnabled) return;
+    if (currentIndex > 0) {
+      currentIndex--;
+    } else {
+      currentIndex = getMaxIndex();
+    }
+    updateSliderPosition();
+  });
+
+  // DRAG & SWIPE LOGIC
+
+  // 1. Pointer Down (Touch start / Click start)
+  track.addEventListener("pointerdown", (e) => {
+    if (!isCarouselEnabled || e.target.closest("summary")) {
+      return;
+    }
+
+    isDragging = true;
+    startX = e.clientX;
+
+    track.style.transition = "none";
+    track.setPointerCapture(e.pointerId);
+  });
+
+  // 2. Pointer Move (Dragging)
+  track.addEventListener("pointermove", (e) => {
+    if (!isDragging || !isCarouselEnabled) return;
+
+    if (window.innerWidth < 768) return;
+
+    const currentX = e.clientX;
+    const diffX = currentX - startX;
+
+    currentTranslate = prevTranslate + diffX;
+    track.style.transform = `translateX(${currentTranslate}px)`;
+  });
+
+  // 3. Pointer Up (Release finger / mouse)
+  track.addEventListener("pointerup", (e) => {
+    if (!isDragging) return;
+    isDragging = false;
+    track.releasePointerCapture(e.pointerId);
+
+    track.style.transition =
+      "transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
+
+    if (window.innerWidth < 768 || !isCarouselEnabled) {
+      return;
+    }
+
+    const movedBy = currentTranslate - prevTranslate;
+    const swipeThreshold = 50;
+
+    if (movedBy < -swipeThreshold && currentIndex < getMaxIndex()) {
+      currentIndex++;
+    } else if (movedBy > swipeThreshold && currentIndex > 0) {
+      currentIndex--;
+    }
+
+    updateSliderPosition();
+  });
+
+  // Handle fallback cancellations (e.g., cursor leaves window midway)
+  track.addEventListener("pointercancel", () => {
+    if (!isDragging) return;
+    isDragging = false;
+    track.style.transition =
+      "transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
+    updateSliderPosition();
+  });
+
+  // Initial runtime verification execution
+  evaluateCarouselState();
+
+  // Resize window observer
+  let resizeTimeout;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      evaluateCarouselState();
+    }, 100);
   });
 });
