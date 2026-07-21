@@ -1,163 +1,161 @@
 import "./stylesheets/main.scss";
 
-// Show floating button when scrolling down.
-let floatingButton = document.getElementsByClassName("floating-dock")[0];
-window.onscroll = function () {
-  scrollFunction();
-};
-function scrollFunction() {
-  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-    floatingButton.style.display = "block";
-  } else {
-    floatingButton.style.display = "none";
-  }
+/* ==========================================================================
+   1. FLOATING NAVIGATION DOCK
+   ========================================================================== */
+const floatingButton = document.querySelector(".floating-dock");
+
+if (floatingButton) {
+  window.addEventListener("scroll", () => {
+    const isScrolled =
+      document.body.scrollTop > 20 || document.documentElement.scrollTop > 20;
+    floatingButton.style.display = isScrolled ? "block" : "none";
+  });
 }
 
-// Add eventlisteners for contact-me images.
-const imgLinks = document.getElementsByClassName("copy-paste__links")[0];
-if (imgLinks) {
-  for (var i = 0; i < imgLinks.childElementCount; i++) {
-    var img = imgLinks.getElementsByTagName("img")[i];
-
-    img.addEventListener("click", copyLinkFromImg);
-
-    img.addEventListener("mouseout", function () {
-      var tooltip = document.getElementById("myTooltip");
-      if (tooltip) tooltip.innerHTML = "Copy to clipboard";
-    });
-  }
-}
-
-// Copy contact details from img to clipboard
-function copyLinkFromImg() {
-  var imgDesc = this.getAttribute("longdesc");
-
-  var dummy = document.createElement("input");
-  document.body.appendChild(dummy);
-  dummy.setAttribute("id", "dummy_id");
-  document.getElementById("dummy_id").value = imgDesc;
-  dummy.select();
-  document.execCommand("copy");
-
-  for (var i = 0; i < imgLinks.childElementCount; i++) {
-    var img = imgLinks.getElementsByTagName("img")[i];
-    var toolTip = img.previousElementSibling;
-
-    if (img === this && toolTip) toolTip.innerHTML = "Copied to clipboard.";
-  }
-
-  document.body.removeChild(dummy);
-}
-
-// Scroll to each section of the page
-const scrollButtons = document.querySelectorAll(".btnNextSection");
-scrollButtons.forEach((button) =>
-  button.addEventListener("click", function (event) {
-    event.preventDefault();
-
-    const targetSelector = this.dataset.target || this.getAttribute("data");
-    const targetSection = document.querySelector(targetSelector);
+/* ==========================================================================
+   2. SMOOTH SCROLL BUTTONS
+   ========================================================================== */
+document.querySelectorAll(".btnNextSection").forEach((button) => {
+  button.addEventListener("click", (e) => {
+    e.preventDefault();
+    const targetSection = document.querySelector(button.dataset.target);
 
     if (targetSection) {
-      targetSection.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
+      targetSection.scrollIntoView({ behavior: "smooth", block: "start" });
     }
-  }),
-);
+  });
+});
 
-// --- INITIALIZE CAROUSEL AND MODAL COMPONENTS ON RUNTIME ---
+/* ==========================================================================
+   3. DOM-DEPENDENT INITIALIZATIONS
+   ========================================================================== */
 document.addEventListener("DOMContentLoaded", () => {
-  // ==========================================
-  // 1. MAIN CAROUSEL LOGIC (CARD-TO-CARD SLIDER)
-  // ==========================================
+  initContactCopyLinks();
+  initMainCarousel();
+  initGalleryModalAndDrag();
+  initCardsTrackCarousel();
+});
+
+/* --------------------------------------------------------------------------
+   Contact Links Tooltip & Copy Logic
+   -------------------------------------------------------------------------- */
+function initContactCopyLinks() {
+  const linksContainer = document.querySelector(".copy-paste__links");
+  if (!linksContainer) return;
+
+  linksContainer.addEventListener("click", async (e) => {
+    const card = e.target.closest("[data-copy-value], a.contact-card");
+    if (!card) return;
+
+    const tooltipText = card.closest(".tooltip")?.querySelector(".tooltiptext");
+    const copyValue = card.getAttribute("data-copy-value");
+
+    if (copyValue) {
+      try {
+        await navigator.clipboard.writeText(copyValue);
+        if (tooltipText) tooltipText.textContent = "Copied to clipboard!";
+      } catch (err) {
+        console.error("Failed to copy text: ", err);
+      }
+      return;
+    }
+
+    if (card.tagName === "A" && card.hasAttribute("href") && tooltipText) {
+      tooltipText.textContent = "Opening link...";
+    }
+  });
+
+  linksContainer.querySelectorAll(".tooltip").forEach((tooltip) => {
+    tooltip.addEventListener("mouseleave", () => {
+      const tooltipText = tooltip.querySelector(".tooltiptext");
+      if (!tooltipText) return;
+
+      if (tooltip.querySelector("[data-copy-value]")) {
+        tooltipText.textContent = "Copy to clipboard";
+      } else if (tooltip.querySelector("a.contact-card")) {
+        tooltipText.textContent = "Open in new tab";
+      }
+    });
+  });
+}
+
+/* --------------------------------------------------------------------------
+   Main Project Carousel
+   -------------------------------------------------------------------------- */
+function initMainCarousel() {
   const track = document.querySelector(".projects__track");
   const nextButton = document.querySelector(".carousel-button.next");
   const prevButton = document.querySelector(".carousel-button.prev");
   const indicatorsContainer = document.querySelector(".carousel-indicators");
 
-  if (track && nextButton && prevButton && indicatorsContainer) {
-    const cards = Array.from(track.children);
-    const indicators = Array.from(indicatorsContainer.children);
-    let currentIndex = 0;
+  if (!track || !nextButton || !prevButton || !indicatorsContainer) return;
 
-    const moveToSlide = (index) => {
-      if (index < 0) index = 0;
-      if (index >= cards.length) index = cards.length - 1;
+  const cards = Array.from(track.children);
+  const indicators = Array.from(indicatorsContainer.children);
+  let currentIndex = 0;
 
-      currentIndex = index;
+  const moveToSlide = (index) => {
+    currentIndex = Math.max(0, Math.min(index, cards.length - 1));
+    track.style.transform = `translateX(${-100 * currentIndex}%)`;
 
-      // Translate track horizontally based on current card percentage
-      track.style.transform = `translateX(${-100 * currentIndex}%)`;
-
-      // Update Pagination Indicator Active States
-      indicators.forEach((dot, i) => {
-        dot.classList.toggle("active", i === currentIndex);
-      });
-
-      // UX Optimization: Fade out nav buttons at extreme positions
-      prevButton.style.opacity = currentIndex === 0 ? "0.3" : "1";
-      prevButton.style.pointerEvents = currentIndex === 0 ? "none" : "auto";
-
-      nextButton.style.opacity =
-        currentIndex === cards.length - 1 ? "0.3" : "1";
-      nextButton.style.pointerEvents =
-        currentIndex === cards.length - 1 ? "none" : "auto";
-    };
-
-    // Click Handlers
-    nextButton.addEventListener("click", () => {
-      if (currentIndex < cards.length - 1) moveToSlide(currentIndex + 1);
+    indicators.forEach((dot, i) => {
+      dot.classList.toggle("active", i === currentIndex);
     });
 
-    prevButton.addEventListener("click", () => {
-      if (currentIndex > 0) moveToSlide(currentIndex - 1);
-    });
+    const isFirst = currentIndex === 0;
+    prevButton.style.opacity = isFirst ? "0.3" : "1";
+    prevButton.style.pointerEvents = isFirst ? "none" : "auto";
 
-    indicatorsContainer.addEventListener("click", (e) => {
-      const targetDot = e.target.closest(".indicator");
-      if (!targetDot) return;
-      moveToSlide(indicators.indexOf(targetDot));
-    });
+    const isLast = currentIndex === cards.length - 1;
+    nextButton.style.opacity = isLast ? "0.3" : "1";
+    nextButton.style.pointerEvents = isLast ? "none" : "auto";
+  };
 
-    // Mobile Outer Swipe Support (Left/Right Card Dragging)
-    let touchStartX = 0;
-    let touchEndX = 0;
-    const swipeThreshold = 50;
+  nextButton.addEventListener("click", () => {
+    if (currentIndex < cards.length - 1) moveToSlide(currentIndex + 1);
+  });
 
-    track.addEventListener(
-      "touchstart",
-      (e) => {
-        touchStartX = e.changedTouches[0].screenX;
-      },
-      { passive: true },
-    );
+  prevButton.addEventListener("click", () => {
+    if (currentIndex > 0) moveToSlide(currentIndex - 1);
+  });
 
-    track.addEventListener(
-      "touchend",
-      (e) => {
-        touchEndX = e.changedTouches[0].screenX;
-        const diff = touchStartX - touchEndX;
+  indicatorsContainer.addEventListener("click", (e) => {
+    const targetDot = e.target.closest(".indicator");
+    if (targetDot) moveToSlide(indicators.indexOf(targetDot));
+  });
 
-        if (Math.abs(diff) > swipeThreshold) {
-          if (diff > 0 && currentIndex < cards.length - 1) {
-            moveToSlide(currentIndex + 1); // Swiped Left
-          } else if (diff < 0 && currentIndex > 0) {
-            moveToSlide(currentIndex - 1); // Swiped Right
-          }
-        }
-      },
-      { passive: true },
-    );
+  let touchStartX = 0;
 
-    // Enforce initial starting position context
-    moveToSlide(0);
-  }
+  track.addEventListener(
+    "touchstart",
+    (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    },
+    { passive: true },
+  );
 
-  // ==========================================
-  // 2. MOBILE-FIRST ZOOM MODAL LAYER LOGIC
-  // ==========================================
+  track.addEventListener(
+    "touchend",
+    (e) => {
+      const diff = touchStartX - e.changedTouches[0].screenX;
+
+      if (Math.abs(diff) > 50) {
+        if (diff > 0 && currentIndex < cards.length - 1)
+          moveToSlide(currentIndex + 1);
+        else if (diff < 0 && currentIndex > 0) moveToSlide(currentIndex - 1);
+      }
+    },
+    { passive: true },
+  );
+
+  moveToSlide(0);
+}
+
+/* --------------------------------------------------------------------------
+   Image Zoom Modal & Gallery Dragging
+   -------------------------------------------------------------------------- */
+function initGalleryModalAndDrag() {
   const modal = document.createElement("div");
   modal.className = "gallery-modal";
   modal.setAttribute("role", "dialog");
@@ -165,9 +163,7 @@ document.addEventListener("DOMContentLoaded", () => {
   modal.innerHTML = `
     <button class="gallery-modal__close" aria-label="Close zoomed image">
       <svg viewBox="0 0 24 24">
-        <!-- Background circle: Transparent inside JS; filled using SASS variable colors -->
         <circle cx="12" cy="12" r="10"/>
-        <!-- Cross lines: Styled cleanly with uniform caps -->
         <path fill="none" stroke-width="2.5" stroke-linecap="round" d="M8 8l8 8M16 8l-8 8"/>
       </svg>
     </button>
@@ -177,22 +173,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const modalImg = modal.querySelector(".gallery-modal__content");
   const closeModalBtn = modal.querySelector(".gallery-modal__close");
-
-  // Catch clicks bubble-up from inner nested photo tracks
-  document.querySelectorAll(".card__gallery").forEach((gallery) => {
-    gallery.addEventListener("click", (e) => {
-      if (e.target.tagName === "IMG") {
-        modalImg.src = e.target.src;
-        modalImg.alt = e.target.alt;
-        modal.classList.add("active");
-        modal.setAttribute("aria-hidden", "false");
-
-        // Prevent system background scrolling behavior on main document layers
-        document.body.style.overflow = "hidden";
-        document.body.style.touchAction = "none";
-      }
-    });
-  });
 
   const closeModal = () => {
     modal.classList.remove("active");
@@ -208,138 +188,104 @@ document.addEventListener("DOMContentLoaded", () => {
   modal.addEventListener("click", (e) => {
     if (e.target === modal) closeModal();
   });
-
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && modal.classList.contains("active")) {
-      closeModal();
-    }
+    if (e.key === "Escape" && modal.classList.contains("active")) closeModal();
   });
-});
 
-document.addEventListener("DOMContentLoaded", () => {
-  const galleries = document.querySelectorAll(".card__gallery");
-  const modal = document.querySelector(".gallery-modal");
-  const modalImg = document.querySelector(".gallery-modal__content");
-
-  galleries.forEach((gallery) => {
+  document.querySelectorAll(".card__gallery").forEach((gallery) => {
     let isDown = false;
-    let startX;
-    let scrollLeft;
-
-    // Coordinates to track click vs. drag
+    let startX = 0;
+    let scrollLeft = 0;
     let mouseDownX = 0;
     let mouseDownY = 0;
 
     gallery.querySelectorAll("img").forEach((img) => {
-      // Prevent browser default ghost-image drag behavior
       img.addEventListener("dragstart", (e) => e.preventDefault());
 
-      // Zoom Modal Trigger (strictly on image click)
       img.addEventListener("click", (e) => {
         const deltaX = Math.abs(e.pageX - mouseDownX);
         const deltaY = Math.abs(e.pageY - mouseDownY);
 
-        // If the user dragged more than 5px, it's a swipe. Cancel the zoom.
         if (deltaX > 5 || deltaY > 5) {
           e.preventDefault();
           e.stopPropagation();
           return;
         }
 
-        // Genuine click: open the zoom modal
         modalImg.src = img.src;
         modalImg.alt = img.alt;
         modal.classList.add("active");
+        modal.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+        document.body.style.touchAction = "none";
       });
     });
 
     gallery.addEventListener("mousedown", (e) => {
       isDown = true;
       gallery.classList.add("active-drag");
-
-      // Store initial click positions
       mouseDownX = e.pageX;
       mouseDownY = e.pageY;
-
       startX = e.pageX - gallery.offsetLeft;
       scrollLeft = gallery.scrollLeft;
-
       gallery.style.scrollSnapType = "none";
       gallery.style.scrollBehavior = "auto";
     });
 
-    gallery.addEventListener("mouseleave", () => {
+    const resetDragState = () => {
       if (!isDown) return;
       isDown = false;
-      gallery.style.scrollSnapType = "x mandatory";
-    });
-
-    gallery.addEventListener("mouseup", () => {
-      if (!isDown) return;
-      isDown = false;
+      gallery.classList.remove("active-drag");
       gallery.style.scrollSnapType = "x mandatory";
       gallery.style.scrollBehavior = "smooth";
-    });
+    };
+
+    gallery.addEventListener("mouseleave", resetDragState);
+    gallery.addEventListener("mouseup", resetDragState);
 
     gallery.addEventListener("mousemove", (e) => {
       if (!isDown) return;
       e.preventDefault();
       const x = e.pageX - gallery.offsetLeft;
-      const walk = (x - startX) * 1.5;
-      gallery.scrollLeft = scrollLeft - walk;
+      gallery.scrollLeft = scrollLeft - (x - startX) * 1.5;
     });
 
-    gallery.addEventListener(
-      "pointerdown",
-      (e) => {
-        e.stopPropagation();
-      },
-      { passive: true },
-    );
-
-    gallery.addEventListener(
-      "pointermove",
-      (e) => {
-        e.stopPropagation();
-      },
-      { passive: true },
-    );
-
-    gallery.addEventListener(
-      "pointerup",
-      (e) => {
-        e.stopPropagation();
-      },
-      { passive: true },
-    );
+    ["pointerdown", "pointermove", "pointerup"].forEach((evt) => {
+      gallery.addEventListener(evt, (e) => e.stopPropagation(), {
+        passive: true,
+      });
+    });
   });
-});
+}
 
-document.addEventListener("DOMContentLoaded", () => {
+/* --------------------------------------------------------------------------
+   Responsive Cards Track Carousel
+   -------------------------------------------------------------------------- */
+function initCardsTrackCarousel() {
   const maskContainer = document.querySelector(".cards");
   const track = document.querySelector(".cards__track");
   const prevButton = document.querySelector(".carousel-button.prev");
   const nextButton = document.querySelector(".carousel-button.next");
   const cards = document.querySelectorAll(".card");
 
-  if (!track || !prevButton || !nextButton || cards.length === 0) return;
+  if (
+    !track ||
+    !prevButton ||
+    !nextButton ||
+    !maskContainer ||
+    cards.length === 0
+  )
+    return;
 
   let currentIndex = 0;
   let isCarouselEnabled = true;
-
-  // Dragging / Swiping State Variables
   let isDragging = false;
   let startX = 0;
   let currentTranslate = 0;
   let prevTranslate = 0;
 
-  // Evaluates layout sizes to determine if the track overflows the viewing viewport mask
   function evaluateCarouselState() {
-    if (!maskContainer || !track) return;
-
-    // Temporarily clear inline styles to get natural architectural measurements
     track.style.transform = "none";
-
     const isOverflowing = track.scrollWidth > maskContainer.clientWidth;
 
     if (!isOverflowing) {
@@ -347,30 +293,28 @@ document.addEventListener("DOMContentLoaded", () => {
       currentIndex = 0;
       prevTranslate = 0;
       currentTranslate = 0;
-
       prevButton.style.display = "none";
       nextButton.style.display = "none";
-      if (maskContainer) maskContainer.classList.add("carousel-disabled");
+      maskContainer.classList.add("carousel-disabled");
     } else {
       isCarouselEnabled = true;
       prevButton.style.display = "";
       nextButton.style.display = "";
-      if (maskContainer) maskContainer.classList.remove("carousel-disabled");
+      maskContainer.classList.remove("carousel-disabled");
       updateSliderPosition();
     }
   }
 
-  // Calculate the shift amount dynamically based on layout styles
   function getShiftAmount() {
     const cardWidth = cards[0].getBoundingClientRect().width;
-    const computedStyle = window.getComputedStyle(track);
-    const gap = parseFloat(computedStyle.gap) || 0;
+    const gap = parseFloat(window.getComputedStyle(track).gap) || 0;
     return cardWidth + gap;
   }
 
   function getMaxIndex() {
-    const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
-    return isTablet ? cards.length - 2 : cards.length - 1;
+    return window.innerWidth >= 768 && window.innerWidth < 1024
+      ? cards.length - 2
+      : cards.length - 1;
   }
 
   function updateSliderPosition() {
@@ -383,82 +327,49 @@ document.addEventListener("DOMContentLoaded", () => {
     track.style.transform = `translateX(${currentTranslate}px)`;
   }
 
-  // Button Listeners
   nextButton.addEventListener("click", () => {
     if (!isCarouselEnabled) return;
-    const maxIndex = getMaxIndex();
-    if (currentIndex < maxIndex) {
-      currentIndex++;
-    } else {
-      currentIndex = 0;
-    }
+    currentIndex = currentIndex < getMaxIndex() ? currentIndex + 1 : 0;
     updateSliderPosition();
   });
 
   prevButton.addEventListener("click", () => {
     if (!isCarouselEnabled) return;
-    if (currentIndex > 0) {
-      currentIndex--;
-    } else {
-      currentIndex = getMaxIndex();
-    }
+    currentIndex = currentIndex > 0 ? currentIndex - 1 : getMaxIndex();
     updateSliderPosition();
   });
 
-  // DRAG & SWIPE LOGIC
-
-  // 1. Pointer Down (Touch start / Click start)
   track.addEventListener("pointerdown", (e) => {
-    if (!isCarouselEnabled || e.target.closest("summary")) {
-      return;
-    }
-
+    if (!isCarouselEnabled || e.target.closest("summary")) return;
     isDragging = true;
     startX = e.clientX;
-
     track.style.transition = "none";
     track.setPointerCapture(e.pointerId);
   });
 
-  // 2. Pointer Move (Dragging)
   track.addEventListener("pointermove", (e) => {
-    if (!isDragging || !isCarouselEnabled) return;
-
-    if (window.innerWidth < 768) return;
-
-    const currentX = e.clientX;
-    const diffX = currentX - startX;
-
-    currentTranslate = prevTranslate + diffX;
+    if (!isDragging || !isCarouselEnabled || window.innerWidth < 768) return;
+    currentTranslate = prevTranslate + (e.clientX - startX);
     track.style.transform = `translateX(${currentTranslate}px)`;
   });
 
-  // 3. Pointer Up (Release finger / mouse)
-  track.addEventListener("pointerup", (e) => {
+  const handlePointerUp = (e) => {
     if (!isDragging) return;
     isDragging = false;
     track.releasePointerCapture(e.pointerId);
-
     track.style.transition =
       "transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
 
-    if (window.innerWidth < 768 || !isCarouselEnabled) {
-      return;
-    }
-
-    const movedBy = currentTranslate - prevTranslate;
-    const swipeThreshold = 50;
-
-    if (movedBy < -swipeThreshold && currentIndex < getMaxIndex()) {
-      currentIndex++;
-    } else if (movedBy > swipeThreshold && currentIndex > 0) {
-      currentIndex--;
+    if (window.innerWidth >= 768 && isCarouselEnabled) {
+      const movedBy = currentTranslate - prevTranslate;
+      if (movedBy < -50 && currentIndex < getMaxIndex()) currentIndex++;
+      else if (movedBy > 50 && currentIndex > 0) currentIndex--;
     }
 
     updateSliderPosition();
-  });
+  };
 
-  // Handle fallback cancellations (e.g., cursor leaves window midway)
+  track.addEventListener("pointerup", handlePointerUp);
   track.addEventListener("pointercancel", () => {
     if (!isDragging) return;
     isDragging = false;
@@ -467,15 +378,11 @@ document.addEventListener("DOMContentLoaded", () => {
     updateSliderPosition();
   });
 
-  // Initial runtime verification execution
   evaluateCarouselState();
 
-  // Resize window observer
   let resizeTimeout;
   window.addEventListener("resize", () => {
     clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(() => {
-      evaluateCarouselState();
-    }, 100);
+    resizeTimeout = setTimeout(evaluateCarouselState, 100);
   });
-});
+}
