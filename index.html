@@ -9,9 +9,15 @@
 
   <body>
     <section class="welcome container">
-      <h1>Welcome <span>Folks!</span></h1>
-      <h2>Take a stroll at my Dev Portfolio</h2>
-      <button class="btnNextSection" data=".profile">Who am I you say?</button>
+      <h1 class="welcome__title"><span>John Jedidiah</span> Getes</h1>
+      <h2 class="welcome__subtitle">Full-Stack & Integration Developer</h2>
+      <p class="welcome__description">
+        I build robust APIs, design seamless system integrations, and craft
+        clean, responsive web applications.
+      </p>
+      <button class="welcome__cta btnNextSection" data-target="#projects">
+        View My Projects
+      </button>
     </section>
 
     <section class="profile container">
@@ -31,7 +37,7 @@
           portfolio!  Thanks!
         </p>
 
-        <button class="btnNextSection" data=".projects">
+        <button class="btnNextSection" data-target="#projects">
           Checkout my CREATIONS
         </button>
       </div>
@@ -39,126 +45,460 @@
       <img src="./assets/me.jpg" alt="John Jedidiah Getes Me" />
     </section>
 
-    <section class="projects">
+    <section class="projects" id="projects">
       <h3>Have a look of my projects</h3>
 
-      <div class="cards">
-        <div class="card">
-          <img src="./assets/projects/1.jpg" alt="project-1" />
-          <details>
-            <summary>Traffic Ticketing System</summary>
-            <p>
-              An android application that uses Bluetooth printing technology for
-              issuing tickets quickly, and accurately records driver violators.
-            </p>
-          </details>
+      <div class="carousel-container">
+        <button class="carousel-button prev">
+          <svg viewBox="0 0 24 24" width="24" height="24">
+            <path
+              fill="currentColor"
+              d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"
+            />
+          </svg>
+        </button>
 
-          <details>
-            <summary>Tools</summary>
-            <p>Android Studio | JAVA | SQLite</p>
-          </details>
-        </div>
-        <div class="card">
-          <img src="./assets/projects/2.jpg" alt="project-1" />
-          <details>
-            <summary>Waterwise Application</summary>
-            <p>
-              A water business desktop application that operates basic CRUD and
-              prints informative and useful documents for everyday tasks.
-            </p>
-          </details>
+        <div class="cards">
+          <div class="cards__track">
+            <div class="card">
+              <div class="card__image-container">
+                <span
+                  class="gallery-zoom-badge"
+                  aria-label="Tap to view larger image"
+                >
+                  <svg viewBox="0 0 24 24" width="14" height="14">
+                    <path
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm10 2l-4.35-4.35"
+                    />
+                  </svg>
+                </span>
+                <span class="gallery-badge">Swipe to view</span>
+                <div class="card__gallery">
+                  <img
+                    src="./assets/projects/1.jpg"
+                    alt="project-1"
+                    loading="lazy"
+                    draggable="false"
+                  />
+                  <img
+                    src="./assets/projects/1.jpg"
+                    alt="project-1"
+                    loading="lazy"
+                    draggable="false"
+                  />
+                  <img
+                    src="./assets/projects/2.jpg"
+                    alt="project-1"
+                    loading="lazy"
+                    draggable="false"
+                  />
+                </div>
+              </div>
 
-          <details>
-            <summary>Tools</summary>
-            <p>Microsoft Visual Studio | C# | Microsoft SQL Server</p>
-          </details>
-        </div>
-        <div class="card">
-          <img src="./assets/projects/3.jpg" alt="project-1" />
-          <details>
-            <summary>NPTA Website</summary>
-            <p>
-              A website that helps an association for spreading their advocacies
-              and reactions especially school matters with regards to teachers,
-              students, and parents' relationship.
-            </p>
-          </details>
+              <div class="card__content">
+                <h3 class="card__title">Traffic Ticketing System</h3>
 
-          <details>
-            <summary>Tools</summary>
-            <p>HTML | CSS/SASS | Javascript</p>
-          </details>
+                <div class="card__tools">
+                  <span class="tool-tag">Android</span>
+                  <span class="tool-tag">Kotlin</span>
+                  <span class="tool-tag">Bluetooth API</span>
+                  <span class="tool-tag">SQLite</span>
+                </div>
+
+                <p class="card__description">
+                  An android application that uses Bluetooth printing technology
+                  for issuing tickets quickly, and accurately records driver
+                  violators.
+                </p>
+
+                <details class="card__details">
+                  <summary>Key Features & Specs</summary>
+                  <div class="card__details-content">
+                    <ul>
+                      <li>
+                        <strong>Wireless Printing:</strong> Instant physical
+                        ticket generation via mobile Bluetooth thermal printers.
+                      </li>
+                      <li>
+                        <strong>Violator Database:</strong> Real-time logging
+                        and retrieval of driver records.
+                      </li>
+                      <li>
+                        <strong>Offline Mode:</strong> Full capability to draft
+                        tickets offline with automatic background sync.
+                      </li>
+                    </ul>
+                  </div>
+                </details>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card__image-container">
+                <span
+                  class="gallery-zoom-badge"
+                  aria-label="Tap to view larger image"
+                >
+                  <svg viewBox="0 0 24 24" width="14" height="14">
+                    <path
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm10 2l-4.35-4.35"
+                    />
+                  </svg>
+                </span>
+                <span class="gallery-badge">Swipe to view</span>
+                <div class="card__gallery">
+                  <img
+                    src="./assets/projects/2.jpg"
+                    alt="project-2"
+                    loading="lazy"
+                    draggable="false"
+                  />
+                  <img
+                    src="./assets/projects/2.jpg"
+                    alt="project-2"
+                    loading="lazy"
+                    draggable="false"
+                  />
+                </div>
+              </div>
+
+              <div class="card__content">
+                <h3 class="card__title">Waterwise Application</h3>
+
+                <div class="card__tools">
+                  <span class="tool-tag">C#</span>
+                  <span class="tool-tag">Visual Studio</span>
+                  <span class="tool-tag">MS SQL Server</span>
+                </div>
+
+                <p class="card__description">
+                  A water business desktop application that operates basic CRUD
+                  and prints informative and useful documents for everyday
+                  tasks.
+                </p>
+
+                <details class="card__details">
+                  <summary>Key Features & Specs</summary>
+                  <div class="card__details-content">
+                    <ul>
+                      <li>
+                        <strong>Data Management:</strong> Streamlined CRUD
+                        operations to smoothly handle consumer accounts and
+                        usage profiles.
+                      </li>
+                      <li>
+                        <strong>Document Generation:</strong> Instant printing
+                        setups for professional invoices, summary logs, and
+                        statements.
+                      </li>
+                      <li>
+                        <strong>Relational Storage:</strong> Scalable SQL
+                        architecture ensuring quick queries and optimized data
+                        integrity.
+                      </li>
+                    </ul>
+                  </div>
+                </details>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card__image-container">
+                <span
+                  class="gallery-zoom-badge"
+                  aria-label="Tap to view larger image"
+                >
+                  <svg viewBox="0 0 24 24" width="14" height="14">
+                    <path
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm10 2l-4.35-4.35"
+                    />
+                  </svg>
+                </span>
+                <span class="gallery-badge">Swipe to view</span>
+                <div class="card__gallery">
+                  <img
+                    src="./assets/projects/3.jpg"
+                    alt="project-3"
+                    loading="lazy"
+                    draggable="false"
+                  />
+                  <img
+                    src="./assets/projects/3.jpg"
+                    alt="project-3"
+                    loading="lazy"
+                    draggable="false"
+                  />
+                </div>
+              </div>
+
+              <div class="card__content">
+                <h3 class="card__title">NPTA Website</h3>
+
+                <div class="card__tools">
+                  <span class="tool-tag">HTML5</span>
+                  <span class="tool-tag">CSS / SASS</span>
+                  <span class="tool-tag">JavaScript</span>
+                </div>
+
+                <p class="card__description">
+                  A website that helps an association for spreading their
+                  advocacies and reactions especially school matters with
+                  regards to teachers, students, and parents' relationship.
+                </p>
+
+                <details class="card__details">
+                  <summary>Key Features & Specs</summary>
+                  <div class="card__details-content">
+                    <ul>
+                      <li>
+                        <strong>Advocacy Hub:</strong> Dedicated digital
+                        channels for publishing community insights and
+                        school-related circulars.
+                      </li>
+                      <li>
+                        <strong>Responsive Design:</strong> Fully responsive
+                        interface written with modern SASS workflows for crisp
+                        cross-device reading.
+                      </li>
+                      <li>
+                        <strong>Interactive Layouts:</strong> Dynamic JavaScript
+                        elements to drive seamless user engagements and media
+                        browsing.
+                      </li>
+                    </ul>
+                  </div>
+                </details>
+              </div>
+            </div>
+          </div>
         </div>
+
+        <button class="carousel-button next">
+          <svg viewBox="0 0 24 24" width="24" height="24">
+            <path
+              fill="currentColor"
+              d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
+            />
+          </svg>
+        </button>
       </div>
 
-      <button class="btnNextSection" data=".contact-me">
-        Contact me Maybe?
+      <button class="btnNextSection projects__cta" data-target="#contact-me">
+        <span>Contact me Maybe?</span>
+        <svg viewBox="0 0 24 24" width="16" height="16">
+          <path
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M19 14l-7 7-7-7M12 5v16"
+          />
+        </svg>
       </button>
     </section>
 
-    <section class="contact-me">
+    <section class="contact-me" id="contact-me">
       <h3>Connect with me</h3>
       <div class="copy-paste__links">
+        <!-- 1. MOBILE NUMBER (Clipboard Copy Action) -->
         <div class="tooltip">
-          <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
-          <img
-            src="./assets/connect-me/icons/mobile number.png"
-            alt="mobile"
-            longdesc="+639 933 418 191"
-          />
+          <span class="tooltiptext">Copy to clipboard</span>
+          <button
+            class="contact-card contact-card--copy"
+            data-copy-value="+639 933 418 191"
+            aria-label="Copy mobile number to clipboard"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              aria-hidden="true"
+              role="img"
+              width="64"
+              height="64"
+              viewBox="0 0 24 24"
+              style="
+                color: rgb(28, 32, 51);
+                opacity: 1;
+                transform: rotate(0deg);
+              "
+            >
+              <path
+                fill="currentColor"
+                d="M16 2H8a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2m-3 19h-2v-1h2zm3-2H8V5h8z"
+              ></path>
+            </svg>
+            <div class="contact-card__info">
+              <span class="contact-card__label">Mobile Number</span>
+              <span class="contact-card__value">+639 933 418 191</span>
+            </div>
+            <span class="contact-card__action-icon" aria-hidden="true">📋</span>
+          </button>
         </div>
+
+        <!-- 2. GMAIL (Clipboard Copy Action) -->
         <div class="tooltip">
-          <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
-          <img
-            src="./assets/connect-me/icons/facebook.png"
-            alt="facebook"
-            longdesc="https://www.facebook.com/johnjedidiah.getes/"
-          />
+          <span class="tooltiptext">Copy to clipboard</span>
+          <button
+            class="contact-card contact-card--copy"
+            data-copy-value="getesjohnjed09@gmail.com"
+            aria-label="Copy email address to clipboard"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              aria-hidden="true"
+              role="img"
+              width="64"
+              height="64"
+              viewBox="0 0 24 24"
+              style="
+                color: rgb(74, 85, 101);
+                opacity: 1;
+                transform: rotate(0deg);
+              "
+            >
+              <path
+                fill="currentColor"
+                d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64L12 9.548l6.545-4.91l1.528-1.145C21.69 2.28 24 3.434 24 5.457"
+              ></path>
+            </svg>
+            <div class="contact-card__info">
+              <span class="contact-card__label">Email Me</span>
+              <span class="contact-card__value">getesjohnjed09@gmail.com</span>
+            </div>
+            <span class="contact-card__action-icon" aria-hidden="true">📋</span>
+          </button>
         </div>
+
+        <!-- 3. FACEBOOK (Direct Redirect Link) -->
         <div class="tooltip">
-          <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
-          <img
-            src="./assets/connect-me/icons/github.png"
-            alt="github"
-            longdesc="https://github.com/johnjed09"
-          />
+          <span class="tooltiptext">Open in new tab</span>
+          <a
+            href="https://www.facebook.com/johnjedidiah.getes/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="contact-card contact-card--link"
+            aria-label="Open Facebook profile"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              aria-hidden="true"
+              role="img"
+              width="64"
+              height="64"
+              viewBox="0 0 24 24"
+              style="
+                color: rgb(74, 85, 101);
+                opacity: 1;
+                transform: rotate(0deg);
+              "
+            >
+              <path
+                fill="currentColor"
+                d="M12 2.04c-5.5 0-10 4.49-10 10.02c0 5 3.66 9.15 8.44 9.9v-7H7.9v-2.9h2.54V9.85c0-2.51 1.49-3.89 3.78-3.89c1.09 0 2.23.19 2.23.19v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.45 2.9h-2.33v7a10 10 0 0 0 8.44-9.9c0-5.53-4.5-10.02-10-10.02"
+              ></path>
+            </svg>
+            <div class="contact-card__info">
+              <span class="contact-card__label">Facebook</span>
+              <span class="contact-card__value">johnjedidiah.getes</span>
+            </div>
+            <span class="contact-card__action-icon" aria-hidden="true">↗</span>
+          </a>
         </div>
+
+        <!-- 4. GITHUB (Direct Redirect Link) -->
         <div class="tooltip">
-          <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
-          <img
-            src="./assets/connect-me/icons/gmail.png"
-            alt="gmail"
-            longdesc="getesjohnjed09@gmail.com"
-          />
+          <span class="tooltiptext">Open in new tab</span>
+          <a
+            href="https://github.com/johnjed09"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="contact-card contact-card--link"
+            aria-label="Open GitHub profile"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              aria-hidden="true"
+              role="img"
+              width="64"
+              height="64"
+              viewBox="0 0 24 24"
+              style="
+                color: rgb(74, 85, 101);
+                opacity: 1;
+                transform: rotate(0deg);
+              "
+            >
+              <path
+                fill="currentColor"
+                d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5c.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34c-.46-1.16-1.11-1.47-1.11-1.47c-.91-.62.07-.6.07-.6c1 .07 1.53 1.03 1.53 1.03c.87 1.52 2.34 1.07 2.91.83c.09-.65.35-1.09.63-1.34c-2.22-.25-4.55-1.11-4.55-4.92c0-1.11.38-2 1.03-2.71c-.1-.25-.45-1.29.1-2.64c0 0 .84-.27 2.75 1.02c.79-.22 1.65-.33 2.5-.33s1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02c.55 1.35.2 2.39.1 2.64c.65.71 1.03 1.6 1.03 2.71c0 3.82-2.34 4.66-4.57 4.91c.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2"
+              ></path>
+            </svg>
+            <div class="contact-card__info">
+              <span class="contact-card__label">GitHub</span>
+              <span class="contact-card__value">johnjed09</span>
+            </div>
+            <span class="contact-card__action-icon" aria-hidden="true">↗</span>
+          </a>
         </div>
+
+        <!-- 5. LINKEDIN (Direct Redirect Link) -->
         <div class="tooltip">
-          <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
-          <img
-            src="./assets/connect-me/icons/linkedin.png"
-            alt="linkedin"
-            longdesc="linkedin.com/in/john-jedidiah-getes-428379194"
-          />
+          <span class="tooltiptext">Open in new tab</span>
+          <a
+            href="https://linkedin.com/in/john-jedidiah-getes-428379194"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="contact-card contact-card--link"
+            aria-label="Open LinkedIn profile"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              aria-hidden="true"
+              role="img"
+              width="64"
+              height="64"
+              viewBox="0 0 24 24"
+              style="
+                color: rgb(74, 85, 101);
+                opacity: 1;
+                transform: rotate(0deg);
+              "
+            >
+              <path
+                fill="currentColor"
+                d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93zM6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37z"
+              ></path>
+            </svg>
+            <div class="contact-card__info">
+              <span class="contact-card__label">LinkedIn</span>
+              <span class="contact-card__value">John Jedidiah Getes</span>
+            </div>
+            <span class="contact-card__action-icon" aria-hidden="true">↗</span>
+          </a>
         </div>
       </div>
     </section>
 
-    <svg
-      class="floating-dock btnNextSection"
-      data=".welcome"
-      aria-hidden="true"
-      focusable="false"
-      data-prefix="fas"
-      data-icon="arrow-circle-up"
-      class="svg-inline--fa fa-arrow-circle-up fa-w-16"
-      role="img"
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 512 512"
-    >
-      <path
-        fill="currentColor"
-        d="M8 256C8 119 119 8 256 8s248 111 248 248-111 248-248 248S8 393 8 256zm143.6 28.9l72.4-75.5V392c0 13.3 10.7 24 24 24h16c13.3 0 24-10.7 24-24V209.4l72.4 75.5c9.3 9.7 24.8 9.9 34.3.4l10.9-11c9.4-9.4 9.4-24.6 0-33.9L273 107.7c-9.4-9.4-24.6-9.4-33.9 0L106.3 240.4c-9.4 9.4-9.4 24.6 0 33.9l10.9 11c9.6 9.5 25.1 9.3 34.4-.4z"
-      ></path>
-    </svg>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

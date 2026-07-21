@@ -1,3 +1,6 @@
+@use "../abstracts/mixins" as *;
+@use "../abstracts/variables" as *;
+
 .profile {
   text-align: center;
   color: white;

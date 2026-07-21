@@ -1,95 +1,396 @@
+@use "../abstracts/mixins" as *;
+@use "../abstracts/variables" as *;
+
 .projects {
   display: flex;
-  text-align: center;
   flex-direction: column;
   justify-content: center;
-  min-height: 100vh;
-  padding: 1em 1em;
+  padding: 4rem 1rem;
+  text-align: center;
+
+  @include respond-to("medium") {
+    justify-content: center;
+    overflow: hidden;
+  }
 
   @include respond-to("large") {
-    padding: 0 5em;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
   }
 
   h3 {
     margin-top: 0;
     text-align: left;
+    width: 100%;
   }
 
-  .cards {
+  // --- Carousel Wrapper Layout ---
+  .carousel-container {
+    position: relative;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin: 1.5rem auto;
 
     @include respond-to("medium") {
-      align-items: center;
+      gap: 1rem;
+      max-width: 100%;
+      transition: transform 0.4s ease-in-out;
+      justify-content: center;
     }
 
     @include respond-to("large") {
-      flex-direction: row;
-      align-items: flex-start;
+      padding: 0;
     }
 
-    .card {
-      display: block;
-      border: 2px solid #ffb739;
-      border-radius: 0.5em;
-      margin-bottom: 2em;
-      max-width: 17em;
-      box-shadow: 3px 3px 10px 2px #ccc;
-      transition: box-shadow 0.3s;
-      margin-right: 0.5em;
-      width: -webkit-fill-available;
-
-      @include respond-to("small") {
-        padding: 2em 1.5em;
-      }
+    // --- Desktop Carousel Controls ---
+    .carousel-button {
+      display: none;
+      color: rgb(253, 108, 11);
+      cursor: pointer;
+      padding: 0.5rem;
+      z-index: 10;
+      flex-shrink: 0;
+      transition:
+        color 0.3s,
+        transform 0.2s;
+      align-items: center;
+      justify-content: center;
+      background-color: #ffffff;
+      border: 1px solid $color-border;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
 
       &:hover {
-        -webkit-box-shadow: 0px 0px 20px 17px #ccc;
-        -moz-box-shadow: 0px 0px 20px 17px #ccc;
-        box-shadow: 0px 0px 20px 17px #ccc;
-        z-index: 1;
+        background-color: $color-primary;
+        border-color: $color-primary;
+        svg {
+          color: #ffffff;
+        }
       }
 
-      img {
+      @include respond-to("medium") {
+        display: flex;
+      }
+
+      @include respond-to("large") {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+
+        &.prev {
+          left: 0;
+        }
+        &.next {
+          right: 0;
+        }
+      }
+    }
+
+    // --- The Masking Viewport ---
+    .cards {
+      overflow: visible;
+      width: 100%;
+      max-width: 100%;
+      margin: 0 auto;
+
+      @include respond-to("large") {
         width: 100%;
-        margin-bottom: 1.5em;
+        // overflow: hidden;
       }
 
-      details {
-        text-align: left;
+      // --- Sliding Track ---
+      &__track {
+        display: flex;
+        flex-direction: column;
+        gap: 2.5rem;
+        width: 100%;
+        transform: none;
+        touch-action: pan-y;
+        align-items: flex-start;
 
-        summary {
-          color: white;
-          padding: 0.5em 1em;
-          background: rgb(253, 108, 11);
-          margin-bottom: 1em;
-          cursor: pointer;
-          outline: none;
-          border-radius: 0.3em;
-          transition: background-color 0.3s;
+        @include respond-to("medium") {
+          display: flex;
+          flex-direction: row;
+          gap: 1.5rem;
+          transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+      }
+    }
 
-          &:hover {
-            background: rgb(255, 135, 56);
+    // --- Base Card CSS ---
+    .card {
+      width: 100%;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      border: 2px solid #ffb739;
+      border-radius: 0.5rem;
+      background: #ffffff;
+      box-shadow: 3px 3px 10px 2px #cccccc;
+
+      @include respond-to("medium") {
+        flex: 0 0 calc(50% - 0.75rem);
+        max-width: calc(50% - 0.75rem);
+        background-color: $color-background;
+        border: 1px solid $color-border;
+      }
+
+      @include respond-to("large") {
+        // CHANGE THIS: Splits layout by 3 instead of 2 to display them perfectly framed
+        flex: 0 0 calc((100% - 3rem) / 3) !important;
+        max-width: calc((100% - 3rem) / 3) !important;
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+
+        &:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+        }
+      }
+
+      &__image-container {
+        position: relative;
+        width: 100%;
+        max-width: 100%;
+        border-top-left-radius: 0.3rem;
+        border-top-right-radius: 0.3rem;
+        overflow: hidden;
+
+        @include respond-to("medium") {
+          height: 200px;
+        }
+
+        .gallery-zoom-badge {
+          @extend %badge-base;
+          left: 0.5rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 28px;
+          height: 28px;
+          border-radius: 50%;
+        }
+
+        .gallery-badge {
+          @extend %badge-base;
+          right: 0.5rem;
+          padding: 0.35rem 0.65rem;
+          font-size: 0.72rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.06em;
+          border-radius: 20px;
+        }
+
+        // --- Inner Multiple Image Swiper ---
+        .card__gallery {
+          display: flex;
+          flex-direction: row;
+          width: 100%;
+          overflow-x: auto;
+          scroll-snap-type: x mandatory;
+          scroll-behavior: smooth;
+          -webkit-overflow-scrolling: touch;
+          cursor: grab;
+          touch-action: pan-x;
+
+          &:active {
+            cursor: grabbing;
+          }
+
+          &::-webkit-scrollbar {
+            display: none;
+          }
+          scrollbar-width: none;
+
+          img {
+            flex: 0 0 100%;
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            display: block;
+            scroll-snap-align: start;
+            object-fit: cover;
+            -webkit-user-drag: none;
+          }
+        }
+      }
+
+      &__content {
+        padding: 1.5rem;
+        background: #ffffff; // Clean white/off-white background
+        border-radius: 0 0 8px 8px;
+        border: 1px solid rgba(0, 0, 0, 0.06); // Subtle boundary border to define the card against light pages
+        border-top: none; // Seamlessly connects to your card image container above
+        display: flex;
+        flex-direction: column;
+        gap: 0.85rem;
+
+        @include respond-to("medium") {
+          padding: 1.25rem;
+        }
+
+        // 1. Project Title (Dark Charcoal for premium contrast)
+        .card__title {
+          margin: 0;
+          font-size: 1.25rem;
+          font-weight: 700;
+          color: #1e293b;
+          line-height: 1.3;
+        }
+
+        // 2. Tools / Tech Stack Tags
+        .card__tools {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+          margin-bottom: 0.25rem;
+
+          .tool-tag {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #e05e00; // Deepened orange for high accessibility/readability on white
+            background: rgba(255, 135, 56, 0.08); // Soft translucent tint
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 135, 56, 0.18);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
           }
         }
 
-        &[open] summary ~ * {
-          animation: sweep 0.5s ease-in-out;
+        // 3. High-Level Description (Soft slate grey)
+        .card__description {
+          margin: 0;
+          font-size: 0.9rem;
+          line-height: 1.5;
+          color: #475569;
+
+          @include respond-to("medium") {
+            line-height: 1.45;
+          }
         }
 
-        @keyframes sweep {
-          from {
-            opacity: 0;
-            margin-top: -10px;
+        // 4. Features & Details (Collapsible area)
+        .card__details {
+          width: 100%;
+          margin-top: 0.5rem;
+          border-top: 1px solid rgba(0, 0, 0, 0.08); // Light gray divider line
+          padding-top: 0.75rem;
+
+          &[open] {
+            summary {
+              color: #e05e00; // Consistent brand accent color when open
+              margin-bottom: 0.75rem;
+
+              &::after {
+                transform: rotate(180deg);
+              }
+            }
           }
 
-          to {
-            opacity: 1;
-            margin-top: 0;
+          summary {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            list-style: none;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #334155;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            user-select: none;
+            transition: color 0.2s ease;
+
+            &::-webkit-details-marker {
+              display: none;
+            }
+
+            &:hover {
+              color: #e05e00;
+            }
+
+            &::after {
+              content: "";
+              display: inline-block;
+              width: 6px;
+              height: 6px;
+              border-right: 2px solid currentColor;
+              border-bottom: 2px solid currentColor;
+              transform: rotate(45deg);
+              margin-right: 0.25rem;
+              transition: transform 0.2s ease;
+            }
+          }
+
+          // Detail specs container wrapper
+          &-content {
+            animation: fadeInSlide 0.25s ease forwards;
+
+            ul {
+              margin: 0;
+              padding-left: 1.1rem;
+              display: flex;
+              flex-direction: column;
+              gap: 0.5rem;
+
+              li {
+                font-size: 0.85rem;
+                line-height: 1.45;
+                color: #475569;
+
+                strong {
+                  color: #0f172a; // Prominent blackish-slate for bold highlight words
+                  font-weight: 600;
+                }
+              }
+            }
           }
         }
       }
     }
+  }
+
+  &__cta {
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    width: 100%;
+    cursor: pointer;
+
+    @include respond-to("large") {
+      width: auto;
+      min-width: 280px;
+      padding: 1rem 2.5rem;
+      margin: 3rem auto 0 auto;
+    }
+
+    svg {
+      transition: transform 0.2s ease;
+    }
+
+    &:hover {
+      svg {
+        transform: translateY(3px);
+      }
+    }
+  }
+}
+
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

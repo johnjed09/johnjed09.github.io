@@ -1,3 +1,6 @@
+@use "sass:map";
+@use "sass:meta";
+@use "../abstracts/variables" as *;
 // -----------------------------------------------------------------------------
 // This file contains all application-wide Sass mixins.
 // -----------------------------------------------------------------------------
@@ -34,19 +37,37 @@
 
 /// Responsive breakpoint manager
 /// @access public
-/// @param {String} $name - Breakpoint
+/// @param {String} $name - Breakpoint name ('small', 'medium', 'large')
 /// @requires $breakpoints
 @mixin respond-to($name) {
-  @if map-has-key($breakpoints, $name) {
-    // Prints a media query based on the value
-    @media #{inspect(map-get($breakpoints, $name))} {
+  @if map.has-key($breakpoints, $name) {
+    $value: map.get($breakpoints, $name);
+    @media (min-width: $value) {
       @content;
     }
   }
 
   // If the key doesn't exist in the map
   @else {
-    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+    @warn "Unfortunately, no value could be retrieved from `#{$name}`. "
           + "Please make sure it is defined in `$breakpoints` map.";
   }
+}
+
+// -----------------------------------------------------------------------------
+// Shared Application-wide Placeholders
+// -----------------------------------------------------------------------------
+
+/// Glassmorphic overlay badge base style
+%badge-base {
+  position: absolute;
+  top: 0.5rem;
+  z-index: 10;
+  color: #ffffff;
+  background: rgba(26, 28, 32, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
 }
