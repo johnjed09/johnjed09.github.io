@@ -63,6 +63,21 @@
     }
   }
 
+  &__location {
+    display: flex;
+    align-items: center;
+    color: #555;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.35rem 0.5rem;
+    font-size: 0.875rem;
+    margin: 0.75rem 0 1.25rem 0;
+
+    @include respond-to("mobileLarge") {
+      font-size: 0.95rem;
+    }
+  }
+
   &__cta {
     margin-top: 3rem;
   }
