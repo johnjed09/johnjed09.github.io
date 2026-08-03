@@ -355,6 +355,52 @@
             }
           }
         }
+
+        .card__actions {
+          padding-top: 1rem;
+          border-top: 1px solid #e2e8f0;
+
+          .card__btn {
+            display: inline-flex;
+            box-sizing: border-box;
+            justify-content: center;
+            gap: 0.5rem;
+            width: 100%;
+            padding: 0.625rem 1rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            line-height: 1.2;
+            text-decoration: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+            &--secondary {
+              color: #1c2033;
+              border: 1.5px solid #1c2033;
+
+              &:hover {
+                color: #ffffff;
+                box-shadow: 3px 3px 12px 6px #ffb739;
+                background-color: #f60;
+                border: 1.5px solid #ffb739;
+              }
+
+              &:active {
+                transform: scale(0.98);
+              }
+            }
+
+            svg {
+              flex-shrink: 0;
+              transition: transform 0.2s ease;
+
+              &:hover svg {
+                color: #ffffff;
+              }
+            }
+          }
+        }
       }
     }
   }
