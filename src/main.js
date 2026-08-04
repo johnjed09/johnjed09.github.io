@@ -340,7 +340,7 @@ function initCardsTrackCarousel() {
   });
 
   track.addEventListener("pointerdown", (e) => {
-    if (!isCarouselEnabled || e.target.closest("summary")) return;
+    if (!isCarouselEnabled || e.target.closest("a, button, summary")) return;
     isDragging = true;
     startX = e.clientX;
     track.style.transition = "none";
