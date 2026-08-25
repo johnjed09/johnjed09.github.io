@@ -1,4 +1,5 @@
 import "./stylesheets/main.scss";
+import { initTracker } from "./tracker.js";
 
 /* ==========================================================================
    1. FLOATING NAVIGATION DOCK
@@ -31,6 +32,7 @@ document.querySelectorAll(".btnNextSection").forEach((button) => {
    3. DOM-DEPENDENT INITIALIZATIONS
    ========================================================================== */
 document.addEventListener("DOMContentLoaded", () => {
+  initTracker();
   initContactCopyLinks();
   initMainCarousel();
   initGalleryModalAndDrag();
