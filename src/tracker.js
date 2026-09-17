@@ -1,8 +1,5 @@
 export function initTracker() {
-  const isLocal = ["localhost", "127.0.0.1"].includes(window.location.hostname);
-  const API_URL = isLocal
-    ? "http://127.0.0.1:8000"
-    : "https://pulse-trace.onrender.com";
+  const API_URL = import.meta.env.VITE_API_BASE_URL;
 
   const endpoint = `${API_URL}/api/v1/track`;
 
