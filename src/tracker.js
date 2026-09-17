@@ -1,7 +1,5 @@
 export function initTracker() {
-  const API_URL = import.meta.env.VITE_API_BASE_URL;
-
-  const endpoint = `${API_URL}/api/v1/track`;
+  const endpoint = "/api/v1/track";
 
   const isRefreshed = sessionStorage.getItem("pv_page_logged");
   if (isRefreshed) {
