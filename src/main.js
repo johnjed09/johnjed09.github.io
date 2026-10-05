@@ -169,12 +169,36 @@ function initGalleryModalAndDrag() {
         <path fill="none" stroke-width="2.5" stroke-linecap="round" d="M8 8l8 8M16 8l-8 8"/>
       </svg>
     </button>
+    <button class="gallery-modal__nav gallery-modal__nav--prev" aria-label="Previous image">&#10094;</button>
     <img class="gallery-modal__content" src="" alt="Zoomed preview" />
+    <button class="gallery-modal__nav gallery-modal__nav--next" aria-label="Next image">&#10095;</button>
   `;
   document.body.appendChild(modal);
 
   const modalImg = modal.querySelector(".gallery-modal__content");
   const closeModalBtn = modal.querySelector(".gallery-modal__close");
+  const prevModalBtn = modal.querySelector(".gallery-modal__nav--prev");
+  const nextModalBtn = modal.querySelector(".gallery-modal__nav--next");
+
+  let activeGalleryImages = [];
+  let currentModalIndex = 0;
+
+  const updateModalImage = (index) => {
+    if (!activeGalleryImages.length) return;
+
+    // Infinite loop through modal gallery
+    if (index < 0) {
+      currentModalIndex = activeGalleryImages.length - 1;
+    } else if (index >= activeGalleryImages.length) {
+      currentModalIndex = 0;
+    } else {
+      currentModalIndex = index;
+    }
+
+    const targetImg = activeGalleryImages[currentModalIndex];
+    modalImg.src = targetImg.src;
+    modalImg.alt = targetImg.alt;
+  };
 
   const closeModal = () => {
     modal.classList.remove("active");
@@ -187,11 +211,27 @@ function initGalleryModalAndDrag() {
   };
 
   closeModalBtn.addEventListener("click", closeModal);
+
+  prevModalBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    updateModalImage(currentModalIndex - 1);
+  });
+
+  nextModalBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    updateModalImage(currentModalIndex + 1);
+  });
+
   modal.addEventListener("click", (e) => {
     if (e.target === modal) closeModal();
   });
+
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && modal.classList.contains("active")) closeModal();
+    if (!modal.classList.contains("active")) return;
+
+    if (e.key === "Escape") closeModal();
+    if (e.key === "ArrowLeft") updateModalImage(currentModalIndex - 1);
+    if (e.key === "ArrowRight") updateModalImage(currentModalIndex + 1);
   });
 
   document.querySelectorAll(".card__gallery").forEach((gallery) => {
@@ -201,7 +241,9 @@ function initGalleryModalAndDrag() {
     let mouseDownX = 0;
     let mouseDownY = 0;
 
-    gallery.querySelectorAll("img").forEach((img) => {
+    const galleryImages = Array.from(gallery.querySelectorAll("img"));
+
+    galleryImages.forEach((img, index) => {
       img.addEventListener("dragstart", (e) => e.preventDefault());
 
       img.addEventListener("click", (e) => {
@@ -214,8 +256,16 @@ function initGalleryModalAndDrag() {
           return;
         }
 
-        modalImg.src = img.src;
-        modalImg.alt = img.alt;
+        activeGalleryImages = galleryImages;
+        currentModalIndex = index;
+
+        // Hide navigation arrows if the gallery only has 1 image
+        const hasMultiple = activeGalleryImages.length > 1;
+        prevModalBtn.style.display = hasMultiple ? "flex" : "none";
+        nextModalBtn.style.display = hasMultiple ? "flex" : "none";
+
+        updateModalImage(currentModalIndex);
+
         modal.classList.add("active");
         modal.setAttribute("aria-hidden", "false");
         document.body.style.overflow = "hidden";
