@@ -165,13 +165,23 @@ function initGalleryModalAndDrag() {
   modal.innerHTML = `
     <button class="gallery-modal__close" aria-label="Close zoomed image">
       <svg viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="10"/>
         <path fill="none" stroke-width="2.5" stroke-linecap="round" d="M8 8l8 8M16 8l-8 8"/>
       </svg>
     </button>
-    <button class="gallery-modal__nav gallery-modal__nav--prev" aria-label="Previous image">&#10094;</button>
+
+    <button class="gallery-modal__nav gallery-modal__nav--prev" aria-label="Previous image">
+      <svg viewBox="0 0 24 24" >
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+    </button>
+
     <img class="gallery-modal__content" src="" alt="Zoomed preview" />
-    <button class="gallery-modal__nav gallery-modal__nav--next" aria-label="Next image">&#10095;</button>
+
+    <button class="gallery-modal__nav gallery-modal__nav--next" aria-label="Next image">
+      <svg viewBox="0 0 24 24">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </button>
   `;
   document.body.appendChild(modal);
 
