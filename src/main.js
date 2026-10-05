@@ -286,6 +286,29 @@ function initCardsTrackCarousel() {
   let currentTranslate = 0;
   let prevTranslate = 0;
 
+  function getCardWidth() {
+    return cards[0] ? cards[0].getBoundingClientRect().width : 0;
+  }
+
+  function getGap() {
+    return parseFloat(window.getComputedStyle(track).gap) || 0;
+  }
+
+  function getShiftAmount() {
+    return getCardWidth() + getGap();
+  }
+
+  function getMaxIndex() {
+    if (cards.length === 0) return 0;
+    const viewportWidth = maskContainer.clientWidth;
+    const shift = getShiftAmount();
+
+    const maxOverflow = track.scrollWidth - viewportWidth;
+    if (maxOverflow <= 0) return 0;
+
+    return Math.ceil(maxOverflow / shift);
+  }
+
   function evaluateCarouselState() {
     track.style.transform = "none";
     const isOverflowing = track.scrollWidth > maskContainer.clientWidth;
@@ -307,18 +330,6 @@ function initCardsTrackCarousel() {
     }
   }
 
-  function getShiftAmount() {
-    const cardWidth = cards[0].getBoundingClientRect().width;
-    const gap = parseFloat(window.getComputedStyle(track).gap) || 0;
-    return cardWidth + gap;
-  }
-
-  function getMaxIndex() {
-    return window.innerWidth >= 768 && window.innerWidth < 1024
-      ? cards.length - 2
-      : cards.length - 1;
-  }
-
   function updateSliderPosition() {
     if (!isCarouselEnabled) {
       track.style.transform = "none";
@@ -329,16 +340,27 @@ function initCardsTrackCarousel() {
     track.style.transform = `translateX(${currentTranslate}px)`;
   }
 
-  nextButton.addEventListener("click", () => {
+  function goToSlide(index) {
     if (!isCarouselEnabled) return;
-    currentIndex = currentIndex < getMaxIndex() ? currentIndex + 1 : 0;
+    const maxIndex = getMaxIndex();
+
+    if (index > maxIndex) {
+      currentIndex = 0;
+    } else if (index < 0) {
+      currentIndex = maxIndex;
+    } else {
+      currentIndex = index;
+    }
+
     updateSliderPosition();
+  }
+
+  nextButton.addEventListener("click", () => {
+    goToSlide(currentIndex + 1);
   });
 
   prevButton.addEventListener("click", () => {
-    if (!isCarouselEnabled) return;
-    currentIndex = currentIndex > 0 ? currentIndex - 1 : getMaxIndex();
-    updateSliderPosition();
+    goToSlide(currentIndex + 1);
   });
 
   track.addEventListener("pointerdown", (e) => {
