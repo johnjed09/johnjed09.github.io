@@ -1,15 +1,23 @@
-export function initTracker() {
-  const endpoint = "/api/v1/track";
+const PAGEVIEW_ENDPOINT = "/api/v1/track";
+const EVENT_ENDPOINT = "/api/v1/track/event";
 
-  const isRefreshed = sessionStorage.getItem("pv_page_logged");
-  if (isRefreshed) {
-    console.log(
-      "Page refresh detected — skipped logging to prevent database bloat.",
-    );
-    return;
+function post(endpoint, payload) {
+  const body = JSON.stringify(payload);
+
+  if (navigator.sendBeacon) {
+    const blob = new Blob([body], { type: "application/json" });
+    if (navigator.sendBeacon(endpoint, blob)) return;
   }
-  sessionStorage.setItem("pv_page_logged", "true");
 
+  fetch(endpoint, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body,
+    keepalive: true,
+  }).catch((error) => console.error("Tracking failed:", error));
+}
+
+function getVisitorId() {
   let visitorId = localStorage.getItem("pv_visitor_id");
   if (!visitorId) {
     visitorId =
@@ -19,33 +27,57 @@ export function initTracker() {
     localStorage.setItem("pv_visitor_id", visitorId);
   }
 
-  function sendTrackingData() {
-    const payload = {
-      visitor_id: visitorId,
+  return visitorId;
+}
+
+function initPageViewTracking() {
+  const isRefreshed = sessionStorage.getItem("pv_page_logged");
+  if (isRefreshed) {
+    console.log(
+      "Page refresh detected — skipped logging to prevent database bloat.",
+    );
+    return;
+  }
+  sessionStorage.setItem("pv_page_logged", "true");
+
+  const send = () =>
+    post(PAGEVIEW_ENDPOINT, {
+      visitor_id: getVisitorId(),
       path: window.location.pathname + window.location.search,
       referrer: document.referrer || null,
       user_agent: navigator.userAgent,
-    };
-
-    if (navigator.sendBeacon) {
-      const blob = new Blob([JSON.stringify(payload)], {
-        type: "application/json",
-      });
-      navigator.sendBeacon(endpoint, blob);
-      return;
-    }
-
-    fetch(endpoint, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-      keepalive: true,
-    }).catch((error) => console.error("Tracking failed:", error));
-  }
+    });
 
   if (document.readyState === "complete") {
-    sendTrackingData();
+    send();
   } else {
-    window.addEventListener("load", sendTrackingData, { once: true });
+    window.addEventListener("load", send, { once: true });
   }
+}
+
+export function trackEvent(eventType, project = null, detail = null) {
+  post(EVENT_ENDPOINT, {
+    visitor_id: getVisitorId(),
+    event_type: eventType,
+    project,
+    detail,
+    path: window.location.pathname,
+  });
+}
+
+function initEngagementTracking() {
+  // Track source-code & demo button clicks (includes middle-click)
+  ["click", "auxclick"].forEach((type) => {
+    document.addEventListener(type, (e) => {
+      const link = e.target.closest("[data-track]");
+      if (!link) return;
+      const project = link.closest("[data-project]")?.dataset.project ?? null;
+      trackEvent("project_link_click", project, link.dataset.track);
+    });
+  });
+}
+
+export function initTracker() {
+  initPageViewTracking();
+  initEngagementTracking();
 }
