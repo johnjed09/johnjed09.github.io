@@ -30,6 +30,15 @@ function getVisitorId() {
   return visitorId;
 }
 
+export function sendPageView() {
+  post(PAGEVIEW_ENDPOINT, {
+    visitor_id: getVisitorId(),
+    path: window.location.pathname + window.location.search,
+    referrer: document.referrer || null,
+    user_agent: navigator.userAgent,
+  });
+}
+
 function initPageViewTracking() {
   const isRefreshed = sessionStorage.getItem("pv_page_logged");
   if (isRefreshed) {
@@ -40,18 +49,10 @@ function initPageViewTracking() {
   }
   sessionStorage.setItem("pv_page_logged", "true");
 
-  const send = () =>
-    post(PAGEVIEW_ENDPOINT, {
-      visitor_id: getVisitorId(),
-      path: window.location.pathname + window.location.search,
-      referrer: document.referrer || null,
-      user_agent: navigator.userAgent,
-    });
-
   if (document.readyState === "complete") {
-    send();
+    sendPageView();
   } else {
-    window.addEventListener("load", send, { once: true });
+    window.addEventListener("load", sendPageView, { once: true });
   }
 }
 
