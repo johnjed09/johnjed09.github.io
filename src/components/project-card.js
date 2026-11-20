@@ -34,7 +34,7 @@ function renderLinks(links) {
     .map(
       (link) => `
       <a
-        class="card__btn card__btn--secondary"
+        class="card__btn card__btn--secondary ${link.track === "private" ? "card__btn--disabled" : ""}"
         href="${escapeHtml(link.url)}"
         target="_blank"
         rel="noopener noreferrer"
@@ -48,17 +48,38 @@ function renderLinks(links) {
     .join("");
 }
 
+function renderFeatures(features) {
+  if (!features || !Array.isArray(features) || features.length === 0) return "";
+  return `
+    <details class="card__details">
+      <summary>Key Features & Specs</summary>
+      <div class="card__details-content">
+        <ul>
+          ${features
+            .map(
+              (item) => `
+            <li>
+              <strong>${item.title}:</strong> ${item.description}
+            </li>`,
+            )
+            .join("")}
+        </ul>
+      </div>
+    </details>
+  `;
+}
+
 export function createProjectCard({
   id,
   title,
   description,
   tags,
-  details,
+  features,
   images,
   links,
 }) {
   const card = html`
-    <article class="card" data-project="${escapeHtml(id)}">
+    <article class="card" data-project="${id}">
       <div class="card__image-container">
         <span class="gallery-zoom-badge" aria-label="Tap to view larger image">
           ${getIconString("zoom")}
@@ -84,16 +105,11 @@ export function createProjectCard({
         <h3 class="card__title">${escapeHtml(title)}</h3>
         <div class="card__tools">
           ${tags
-            .map((tag) => `<span class="tool-tag">${escapeHtml(tag)}</span>`)
+            .map((tag) => `<span class="tool-tag">${tag}</span>`)
             .join("")}
         </div>
         <p class="card__description">${escapeHtml(description)}</p>
-        ${details
-          ? html`<details class="card__details">
-              <summary>Key Features & Specs</summary>
-              <div class="card__details-content">${escapeHtml(details)}</div>
-            </details>`
-          : ""}
+        ${renderFeatures(features)}
         <div class="card__actions">${renderLinks(links)}</div>
       </div>
     </article>
@@ -101,3 +117,5 @@ export function createProjectCard({
 
   return card;
 }
+
+

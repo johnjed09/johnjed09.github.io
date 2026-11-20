@@ -4,7 +4,24 @@
     "title": "Custom Chat System",
     "description": "A web application that allows users to send and receive message real-time includes live-notifications, authentication, and even private messaging.",
     "tags": ["WebSocket", "Handlebar", "XAMPP", "MySql", "Node.Js"],
-    "details": "<ul><li><strong>Live-Messaging:</strong> Real-time communication with WebSocket protocol for instant message delivery.</li><li><strong>Live-Notification:</strong> Real-time alerts for chat statuses and message updates, enhancing user engagement and responsiveness.</li><li><strong>Login and Registration:</strong> Secure user authentication with encryption layer.</li><li><strong>Private Messaging:</strong> Direct one-on-one chat which auto-deletes after session ends for privacy and security.</li></ul>",
+    "features": [
+      {
+        "title": "Live-Messaging",
+        "description": "Real-time communication with WebSocket protocol for instant message delivery."
+      },
+      {
+        "title": "Live-Notification",
+        "description": "Real-time alerts for chat statuses and message updates, enhancing user engagement and responsiveness."
+      },
+      {
+        "title": "Login and Registration",
+        "description": "Secure user authentication with encryption layer."
+      },
+      {
+        "title": "Private Messaging",
+        "description": "Direct one-on-one chat which auto-deletes after session ends for privacy and security."
+      }
+    ],
     "images": [
       {
         "src": "./assets/projects/custom-chat/Custom Chat Backend.svg",
@@ -59,7 +76,24 @@
     "title": "Hold On",
     "description": "Mini-game that eats your time holding on that button. Must be played with your significant others. Hold until you last to be not last!",
     "tags": ["WebSockets", "Next.Js", "Tailwind CSS", "Nest.Js"],
-    "details": "<ul><li><strong>Real-time Live Connectivity:</strong> With WebSockets powerful protocol, players can now interact with each other at the same time.</li><li><strong>Simple Color Design:</strong> Minimalistic and common color palette for clean and direct visuals.</li><li><strong>Dark Mode:</strong> Dynamic environment based on your system preference.</li><li><strong>Interactive and Responsive:</strong> Dynamic elements to drive user engagements upon looking at the screen on any screen-sizes.</li></ul>",
+    "features": [
+      {
+        "title": "Real-time Live Connectivity",
+        "description": "With WebSockets powerful protocol, players can now interact with each other at the same time."
+      },
+      {
+        "title": "Simple Color Design",
+        "description": "Minimalistic and common color palette for clean and direct visuals."
+      },
+      {
+        "title": "Dark Mode",
+        "description": "Dynamic environment based on your system preference."
+      },
+      {
+        "title": "Interactive and Responsive",
+        "description": "Dynamic elements to drive user engagements upon looking at the screen on any screen-sizes."
+      }
+    ],
     "images": [
       {
         "src": "./assets/projects/hold-on/1.jpg",
@@ -98,7 +132,20 @@
     "title": "NPTA Website",
     "description": "A website that helps an association for spreading their advocacies and reactions especially school matters with regards to teachers, students, and parents' relationship.",
     "tags": ["HTML5", "CSS / SASS", "JavaScript"],
-    "details": "<ul><li><strong>Advocacy Hub:</strong> Dedicated digital channels for publishing community insights and school-related circulars.</li><li><strong>Responsive Design:</strong> Fully responsive interface written with modern SASS workflows for crisp cross-device reading.</li><li><strong>Interactive Layouts:</strong> Dynamic JavaScript elements to drive seamless user engagements and media browsing.</li></ul>",
+    "features": [
+      {
+        "title": "Advocacy Hub",
+        "description": "Dedicated digital channels for publishing community insights and school-related circulars."
+      },
+      {
+        "title": "Responsive Design",
+        "description": "Fully responsive interface written with modern SASS workflows for crisp cross-device reading."
+      },
+      {
+        "title": "Interactive Layouts",
+        "description": "Dynamic JavaScript elements to drive seamless user engagements and media browsing."
+      }
+    ],
     "images": [
       {
         "src": "./assets/projects/3.jpg",
@@ -129,8 +176,22 @@
   {
     "id": "traffic-ticketing-system",
     "title": "Traffic Ticketing System",
-    "description": "",
-    "tags": [],
+    "description": "An android application that uses Bluetooth printing technology for issuing tickets quickly, and accurately records driver violators.",
+    "tags": ["Android", "Kotlin", "Bluetooth API", "SQLite"],
+    "features": [
+      {
+        "title": "Wireless Printing",
+        "description": "Instant physical ticket generation via mobile Bluetooth thermal printers."
+      },
+      {
+        "title": "Violator Database",
+        "description": "Real-time logging and retrieval of driver records."
+      },
+      {
+        "title": "Offline Mode",
+        "description": "Full capability to draft tickets offline with automatic background sync."
+      }
+    ],
     "images": [
       {
         "src": "./assets/projects/1.jpg",
@@ -139,14 +200,33 @@
         "height": 667
       }
     ],
-    "links": []
+    "links": [
+      {
+        "label": "Private Repository",
+        "url": "#",
+        "track": "private"
+      }
+    ]
   },
   {
     "id": "waterwise",
     "title": "Waterwise Application",
     "description": "A water business desktop application that operates basic CRUD and prints informative and useful documents for everyday tasks.",
     "tags": ["C#", "Visual Studio", "MS SQL Server"],
-    "details": "<ul><li><strong>Data Management:</strong> Streamlined CRUD operations to smoothly handle consumer accounts and usage profiles.</li><li><strong>Document Generation:</strong> Instant printing setups for professional invoices, summary logs, and statements.</li><li><strong>Relational Storage:</strong> Scalable SQL architecture ensuring quick queries and optimized data integrity.</li></ul>",
+    "features": [
+      {
+        "title": "Data Management",
+        "description": "Streamlined CRUD operations to smoothly handle consumer accounts and usage profiles."
+      },
+      {
+        "title": "Document Generation",
+        "description": "Instant printing setups for professional invoices, summary logs, and statements."
+      },
+      {
+        "title": "Relational Storage",
+        "description": "Scalable SQL architecture ensuring quick queries and optimized data integrity."
+      }
+    ],
     "images": [
       {
         "src": "./assets/projects/2.jpg",
