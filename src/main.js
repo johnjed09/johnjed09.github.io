@@ -1,5 +1,7 @@
 import "./stylesheets/main.scss";
 import { initTracker } from "./tracker.js";
+import projects from "./data/projects.json";
+import { createProjectCard } from "./components/project-card.js";
 
 /* ==========================================================================
    1. FLOATING NAVIGATION DOCK
@@ -32,6 +34,15 @@ document.querySelectorAll(".btnNextSection").forEach((button) => {
    3. DOM-DEPENDENT INITIALIZATIONS
    ========================================================================== */
 document.addEventListener("DOMContentLoaded", () => {
+  // Render project cards from data
+  const track = document.querySelector(".cards__track");
+  if (track) {
+    track.innerHTML = "";
+    projects.forEach((project) => {
+      track.appendChild(createProjectCard(project));
+    });
+  }
+
   initTracker();
   initContactCopyLinks();
   initMainCarousel();

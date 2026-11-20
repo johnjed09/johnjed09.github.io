@@ -1,0 +1,166 @@
+[
+  {
+    "id": "custom-chat-system",
+    "title": "Custom Chat System",
+    "description": "A web application that allows users to send and receive message real-time includes live-notifications, authentication, and even private messaging.",
+    "tags": ["WebSocket", "Handlebar", "XAMPP", "MySql", "Node.Js"],
+    "details": "<ul><li><strong>Live-Messaging:</strong> Real-time communication with WebSocket protocol for instant message delivery.</li><li><strong>Live-Notification:</strong> Real-time alerts for chat statuses and message updates, enhancing user engagement and responsiveness.</li><li><strong>Login and Registration:</strong> Secure user authentication with encryption layer.</li><li><strong>Private Messaging:</strong> Direct one-on-one chat which auto-deletes after session ends for privacy and security.</li></ul>",
+    "images": [
+      {
+        "src": "./assets/projects/custom-chat/Custom Chat Backend.svg",
+        "alt": "Custom Chat Architecture"
+      },
+      {
+        "src": "./assets/projects/custom-chat/1.png",
+        "alt": "screenshot-1",
+        "width": 1851,
+        "height": 915
+      },
+      {
+        "src": "./assets/projects/custom-chat/2.png",
+        "alt": "screenshot-2",
+        "width": 467,
+        "height": 962
+      },
+      {
+        "src": "./assets/projects/custom-chat/3.png",
+        "alt": "screenshot-3",
+        "width": 442,
+        "height": 960
+      },
+      {
+        "src": "./assets/projects/custom-chat/4.png",
+        "alt": "screenshot-4",
+        "width": 1917,
+        "height": 981
+      },
+      {
+        "src": "./assets/projects/custom-chat/5.png",
+        "alt": "screenshot-5",
+        "width": 1917,
+        "height": 976
+      }
+    ],
+    "links": [
+      {
+        "label": "Source Code",
+        "url": "https://github.com/johnjed09/CustomChatSystem.git",
+        "track": "source"
+      },
+      {
+        "label": "Demo",
+        "url": "https://customchatsystem.onrender.com",
+        "track": "demo"
+      }
+    ]
+  },
+  {
+    "id": "hold-on",
+    "title": "Hold On",
+    "description": "Mini-game that eats your time holding on that button. Must be played with your significant others. Hold until you last to be not last!",
+    "tags": ["WebSockets", "Next.Js", "Tailwind CSS", "Nest.Js"],
+    "details": "<ul><li><strong>Real-time Live Connectivity:</strong> With WebSockets powerful protocol, players can now interact with each other at the same time.</li><li><strong>Simple Color Design:</strong> Minimalistic and common color palette for clean and direct visuals.</li><li><strong>Dark Mode:</strong> Dynamic environment based on your system preference.</li><li><strong>Interactive and Responsive:</strong> Dynamic elements to drive user engagements upon looking at the screen on any screen-sizes.</li></ul>",
+    "images": [
+      {
+        "src": "./assets/projects/hold-on/1.jpg",
+        "alt": "project-3",
+        "width": 1919,
+        "height": 736
+      },
+      {
+        "src": "./assets/projects/hold-on/2.jpg",
+        "alt": "project-3",
+        "width": 1919,
+        "height": 979
+      },
+      {
+        "src": "./assets/projects/hold-on/3.jpg",
+        "alt": "project-3",
+        "width": 1918,
+        "height": 977
+      }
+    ],
+    "links": [
+      {
+        "label": "Source Code",
+        "url": "https://github.com/johnjed09/fe-hold-on.git",
+        "track": "source"
+      },
+      {
+        "label": "Demo",
+        "url": "https://fe-hold-on.onrender.com/",
+        "track": "demo"
+      }
+    ]
+  },
+  {
+    "id": "npta-website",
+    "title": "NPTA Website",
+    "description": "A website that helps an association for spreading their advocacies and reactions especially school matters with regards to teachers, students, and parents' relationship.",
+    "tags": ["HTML5", "CSS / SASS", "JavaScript"],
+    "details": "<ul><li><strong>Advocacy Hub:</strong> Dedicated digital channels for publishing community insights and school-related circulars.</li><li><strong>Responsive Design:</strong> Fully responsive interface written with modern SASS workflows for crisp cross-device reading.</li><li><strong>Interactive Layouts:</strong> Dynamic JavaScript elements to drive seamless user engagements and media browsing.</li></ul>",
+    "images": [
+      {
+        "src": "./assets/projects/3.jpg",
+        "alt": "project-3",
+        "width": 1366,
+        "height": 667
+      },
+      {
+        "src": "./assets/projects/3.jpg",
+        "alt": "project-3",
+        "width": 1366,
+        "height": 667
+      }
+    ],
+    "links": [
+      {
+        "label": "Source Code",
+        "url": "https://github.com/johnjed09/npta-philippines-website.git",
+        "track": "source"
+      },
+      {
+        "label": "Demo",
+        "url": "#",
+        "track": "demo"
+      }
+    ]
+  },
+  {
+    "id": "traffic-ticketing-system",
+    "title": "Traffic Ticketing System",
+    "description": "",
+    "tags": [],
+    "images": [
+      {
+        "src": "./assets/projects/1.jpg",
+        "alt": "project-3",
+        "width": 1366,
+        "height": 667
+      }
+    ],
+    "links": []
+  },
+  {
+    "id": "waterwise",
+    "title": "Waterwise Application",
+    "description": "A water business desktop application that operates basic CRUD and prints informative and useful documents for everyday tasks.",
+    "tags": ["C#", "Visual Studio", "MS SQL Server"],
+    "details": "<ul><li><strong>Data Management:</strong> Streamlined CRUD operations to smoothly handle consumer accounts and usage profiles.</li><li><strong>Document Generation:</strong> Instant printing setups for professional invoices, summary logs, and statements.</li><li><strong>Relational Storage:</strong> Scalable SQL architecture ensuring quick queries and optimized data integrity.</li></ul>",
+    "images": [
+      {
+        "src": "./assets/projects/2.jpg",
+        "alt": "project-2",
+        "width": 1366,
+        "height": 768
+      }
+    ],
+    "links": [
+      {
+        "label": "Private Repository",
+        "url": "#",
+        "track": "private"
+      }
+    ]
+  }
+]
